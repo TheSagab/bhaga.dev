@@ -128,3 +128,11 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Astro
+.astro/
+
+# macOS-specific files
+.DS_Store
+
+.vscode/
