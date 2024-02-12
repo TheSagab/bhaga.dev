@@ -31,13 +31,13 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 ## Images
 
-#### Syntax
+### Syntax
 
 ```markdown
 ![Alt text](./full/or/relative/path/of/image)
 ```
 
-#### Output
+### Output
 
 ![blog placeholder](/blog-placeholder-about.jpg)
 
@@ -50,13 +50,13 @@ The blockquote element represents content that is quoted from another source, op
 #### Syntax
 
 ```markdown
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
+> Tiam, ad mint andaepu dandae nostion secatur sequo quae.
 > **Note** that you can use _Markdown syntax_ within a blockquote.
 ```
 
 #### Output
 
-> Tiam, ad mint andaepu dandae nostion secatur sequo quae.  
+> Tiam, ad mint andaepu dandae nostion secatur sequo quae.
 > **Note** that you can use _Markdown syntax_ within a blockquote.
 
 ### Blockquote with attribution
@@ -77,7 +77,7 @@ The blockquote element represents content that is quoted from another source, op
 
 ## Tables
 
-#### Syntax
+### Syntax
 
 ```markdown
 | Italics   | Bold     | Code   |
@@ -85,7 +85,7 @@ The blockquote element represents content that is quoted from another source, op
 | _italics_ | **bold** | `code` |
 ```
 
-#### Output
+### Output
 
 | Italics   | Bold     | Code   |
 | --------- | -------- | ------ |
@@ -93,7 +93,7 @@ The blockquote element represents content that is quoted from another source, op
 
 ## Code Blocks
 
-#### Syntax
+### Syntax
 
 we can use 3 backticks ``` in new line and write snippet and close with 3 backticks on new line and to highlight language specific syntac, write one word of language name after first 3 backticks, for eg. html, javascript, css, markdown, typescript, txt, bash
 
@@ -187,7 +187,7 @@ Output
 
 ## Other Elements — abbr, sub, sup, kbd, mark
 
-#### Syntax
+### Syntax
 
 ```markdown
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
@@ -201,14 +201,10 @@ Press <kbd><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Delete</kbd></kbd> to end the ses
 Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.
 ```
 
-#### Output
+### Output
 
 <abbr title="Graphics Interchange Format">GIF</abbr> is a bitmap image format.
 
 H<sub>2</sub>O
 
 X<sup>n</sup> + Y<sup>n</sup> = Z<sup>n</sup>
-
-Press <kbd><kbd>CTRL</kbd>+<kbd>ALT</kbd>+<kbd>Delete</kbd></kbd> to end the session.
-
-Most <mark>salamanders</mark> are nocturnal, and hunt for insects, worms, and other small creatures.

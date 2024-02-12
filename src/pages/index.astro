@@ -1,59 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ButtonLink from "../components/ButtonLink.astro"
 ---
 
 <Layout>
-  <h1 class="text-3xl font-bold pb-4">Hello, Astronaut!</h1>
-  <p class="pb-4">
-    Welcome to the official <a
-      class="underline text-blue-600"
-      href="https://astro.build/">Astro</a
-    > blog starter template. This template serves as a lightweight, minimally-styled
-    starting point for anyone looking to build a personal website, blog, or portfolio
-    with Astro.
+  <h1 class="text-3xl font-bold pb-4 text-gray-12 font-sans">Welcome to my website! My name is Anindito Bhagawanta.</h1>
+  <h2 class="text-xl font-bold pb-4 text-gray-11 font-sans">You can call me Bhaga.</h1>
+  <p class="pb-4 text-gray-12">
+    I'm a software engineer from Indonesia. I mostly working in both front-end and back-end. When I'm not working,
+    I mostly play video games, create some side projects, and tinkering with random stuff.
   </p>
-  <p class="pb-4">
-    This template comes with a few integrations already configured in your
-    <code>astro.config.mjs</code> file. You can customize your setup with
-    <a class="underline text-blue-600" href="https://astro.build/integrations"
-      >Astro Integrations</a
-    > to add tools like Tailwind, React, or Vue to your project.
-  </p>
-  <p class="pb-4">
-    Here are a few ideas on how to get started with the template:
-  </p>
-  <ul class="list-disc ms-8 me-8 pb-4">
-    <li class="list-item">
-      Edit this page in <code>src/pages/index.astro</code>
-    </li>
-    <li class="list-item">
-      Edit the site header items in <code>src/components/Header.astro</code>
-    </li>
-    <li class="list-item">
-      Add your name to the footer in <code>src/components/Footer.astro</code>
-    </li>
-    <li class="list-item">
-      Check out the included blog posts in <code>src/pages/blog/</code>
-    </li>
-    <li class="list-item">
-      Customize the blog post page layout in <code
-        >src/layouts/BlogPost.astro</code>
-    </li>
-  </ul>
-  <p class="pb-4">
-    Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-      >read the docs
-    </a> or <a class="underline text-blue-600" href="https://astro.build/chat"
-      >join us on Discord</a
-    > to ask questions.
-  </p>
-  <p class="pb-4">
-    Looking for a blog template with a bit more personality? Check out <a
-      class="underline text-blue-600"
-      href="https://github.com/Charca/astro-blog-template"
-      >astro-blog-template
-    </a> by <a class="underline text-blue-600" href="https://twitter.com/Charca"
-      >Maxi Ferreira</a
-    >.
-  </p>
+  <ButtonLink accent="red" href="/blog">
+    Check out my blog
+  </ButtonLink>
+  <ButtonLink accent="green" href="/about">
+    Learn more about me
+  </ButtonLink>
+  <ButtonLink accent="blue" href="/uses">
+    See what I'm using
+  </ButtonLink>
 </Layout>
