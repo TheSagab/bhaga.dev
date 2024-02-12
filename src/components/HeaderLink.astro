@@ -11,9 +11,6 @@ const { href, accent, ...props } = Astro.props;
 const { pathname } = Astro.url;
 const isActive = href === pathname || href === pathname.replace(/\/$/, '');
 
-// const className = `mx-2 text-${accent}-11 hover:text-${accent}-12 px-2 py-2 text-center`
-// const isActiveClassName = `text-${accent}-12 font-bold`
-
 const className = "mx-2 px-2 py-2 text-center";
 let accentClassName: string;
 let isActiveClassName: string;
@@ -31,6 +28,10 @@ switch (accent) {
 	  accentClassName = "text-blue-11 hover:text-blue-12";
 		isActiveClassName = "text-blue-12 font-bold"
     break;
+	case 'purple':
+	  accentClassName = "text-purple-11 hover:text-purple-12";
+		isActiveClassName = "text-purple-12 font-bold"
+		break;
 }
 
 ---

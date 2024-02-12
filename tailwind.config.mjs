@@ -9,6 +9,7 @@ export default {
 				blue: generateScale("blue"),
 				green: generateScale("green"),
 				red: generateScale("red"),
+				purple: generateScale("purple"),
 				gray: generateScale("gray"),
 			},
 			fontFamily: {
