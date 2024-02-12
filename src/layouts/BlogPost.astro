@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import Layout from './Layout.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import Prose from '../components/Prose.astro';
+import Prose from '../components/BlogProse.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
@@ -12,7 +12,7 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 <Layout>
 	<article>
 		<div class="pb-4">
-			<div class="text-blue-11">
+			<div class="text-red-12">
 				<FormattedDate date={pubDate} />
 				{
 					updatedDate && (
@@ -22,7 +22,7 @@ const { title, description, pubDate, updatedDate } = Astro.props;
 					)
 				}
 			</div>
-			<h1 class="text-3xl font-bold pb-4 text-gray-11">{title}</h1>
+			<h1 class="text-3xl font-bold pb-4 text-red-11">{title}</h1>
 			<hr />
 		</div>
 		<Prose>

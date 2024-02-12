@@ -14,16 +14,24 @@ const posts = (await getCollection("blog")).sort(
 
 <Layout>
   <section>
-    <ul>
+    <h1 class="text-3xl font-bold pb-4 text-red-11">Blog</h1>
+    <ul class="grid grid-cols-1 gap-4">
       {
         posts.map((post) => (
-          <li>
-            <a href={`/blog/${post.slug}/`}>
-              <h4 class="text-lg font-bold pb-4 text-gray-12">{post.data.title}</h4>
-              <p class="pb-4 text-blue-11">
-                <FormattedDate date={post.data.pubDate} />
-              </p>
-            </a>
+          <li class="border-l-2 border-red-6 bg-red-2 hover:bg-red-4 active:bg-red-5">
+            <div class="p-4">
+              <a href={`/blog/${post.slug}/`}>
+                <div class="flex w-full items-center justify-between">
+                  <h2 class="text-xl font-bold text-red-11">
+                    {post.data.title}
+                  </h2>
+                  <p class="text-red-12">
+                    <FormattedDate date={post.data.pubDate} />
+                  </p>
+                </div>
+                <p class="text-gray-12">{post.data.description}</p>
+              </a>
+            </div>
           </li>
         ))
       }
