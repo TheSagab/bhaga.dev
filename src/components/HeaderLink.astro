@@ -1,41 +1,18 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
-import { type Accent } from '../consts'
 
 export interface Props extends HTMLAttributes<'a'> {
-	accent: Accent
 }
 
-const { href, accent, ...props } = Astro.props;
+const { href, ...props } = Astro.props;
 
 const { pathname } = Astro.url;
 const isActive = href === pathname || href === pathname.replace(/\/$/, '');
 
 const className = "mx-2 px-2 py-2 text-center";
-let accentClassName: string;
-let isActiveClassName: string;
-
-switch (accent) {
-  case "red":
-    accentClassName = "text-red-11 hover:text-red-12";
-		isActiveClassName = "text-red-12 font-bold"
-    break;
-  case "green":
-	  accentClassName = "text-green-11 hover:text-green-12";
-		isActiveClassName = "text-green-12 font-bold"
-    break;
-  case "blue":
-	  accentClassName = "text-blue-11 hover:text-blue-12";
-		isActiveClassName = "text-blue-12 font-bold"
-    break;
-	case 'purple':
-	  accentClassName = "text-purple-11 hover:text-purple-12";
-		isActiveClassName = "text-purple-12 font-bold"
-		break;
-}
 
 ---
 
-<a href={href} class:list={[className, accentClassName, isActive && isActiveClassName]} {...props}>
+<a href={href} class:list={[className]} {...props}>
 	<slot />
 </a>

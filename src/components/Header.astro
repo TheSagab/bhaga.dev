@@ -5,12 +5,12 @@ import { SITE_TITLE } from "../consts";
 ---
 
 <header class="flex place-content-between place-items-center py-4">
-	<h2 class="text-2xl font-bold text-gray-11 hover:text-gray-12"><a href="/">{SITE_TITLE}</a></h2>
+	<h2 class="text-2xl font-bold"><a href="/">{SITE_TITLE}</a></h2>
 	<nav class="flex items-center px-2">
-		<HeaderLink accent="red" href="/blog">Blog</HeaderLink>
-		<HeaderLink accent="green" href="/projects">Projects</HeaderLink>
-		<HeaderLink accent="blue" href="/about">About</HeaderLink>
-		<HeaderLink accent="purple" href="/uses">Uses</HeaderLink>
+		<HeaderLink href="/blog">Blog</HeaderLink>
+		<HeaderLink  href="/projects">Projects</HeaderLink>
+		<HeaderLink  href="/about">About</HeaderLink>
+		<HeaderLink  href="/uses">Uses</HeaderLink>
 	</nav>
 	<ThemeIcon />
 </header>

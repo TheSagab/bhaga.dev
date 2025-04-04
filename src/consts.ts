@@ -3,4 +3,3 @@
 
 export const SITE_TITLE = 'bhaga.dev';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
-export type Accent = 'red' | 'green' | 'blue' | 'purple';
