@@ -1,5 +1,6 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
+import SearchIcon from "./SearchIcon.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 import { SITE_TITLE } from "../consts";
 ---
@@ -12,5 +13,8 @@ import { SITE_TITLE } from "../consts";
     <HeaderLink href="/about">About</HeaderLink>
     <HeaderLink href="/uses">Uses</HeaderLink>
   </nav>
-  <ThemeIcon />
+  <div>
+    <SearchIcon />
+    <ThemeIcon />
+  </div>
 </header>

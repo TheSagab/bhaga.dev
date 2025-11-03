@@ -16,9 +16,11 @@
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@fontsource-variable/plus-jakarta-sans": "^5.2.8",
+    "@lucide/astro": "^0.552.0",
     "@radix-ui/colors": "^3.0.0",
     "@tailwindcss/vite": "^4.1.16",
     "astro": "^5.15.3",
+    "astro-pagefind": "^1.8.5",
     "tailwindcss": "^4.1.16",
     "typescript": "^5.9.3"
   },
