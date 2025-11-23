@@ -11,6 +11,6 @@ const isActive = href === pathname || href === pathname.replace(/\/$/, "");
 const className = "mx-2 px-2 py-2 text-center";
 ---
 
-<a href={href} class:list={[className, isActive && "text-mint-11"]} {...props}>
+<a href={href} class:list={[className, isActive && "text-cyan-11"]} {...props}>
   <slot />
 </a>

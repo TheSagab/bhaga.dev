@@ -1,16 +1,261 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import ButtonLink from "../components/ButtonLink.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import FormattedDate from "../components/FormattedDate.astro";
+import { SOCIAL_LINKS, SKILLS } from "../consts";
+
+// Get latest 3 blog posts (newest first)
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const latestPosts = allPosts.slice(0, 3);
+
+// Get featured projects (if projects collection exists)
+let featuredProjects: CollectionEntry<"projects">[] = [];
+try {
+  const allProjects = await getCollection("projects");
+  featuredProjects = allProjects
+    .filter((p) => p.data.featured)
+    .slice(0, 3)
+    .sort((a, b) => {
+      const dateA = a.data.date?.valueOf() || 0;
+      const dateB = b.data.date?.valueOf() || 0;
+      return dateB - dateA;
+    });
+} catch {
+  // Projects collection doesn't exist yet, that's okay
+}
 ---
 
 <Layout>
-  <h1 class="text-3xl font-bold pb-4">
-    Welcome to my website! My name is Anindito Bhagawanta.
-  </h1>
-  <h2 class="text-xl font-bold pb-4">You can call me Bhaga.</h2>
-  <p class="pb-4">
-    I'm a software engineer from Indonesia. I mostly working in both front-end
-    and back-end. When I'm not working, I mostly play video games, create some
-    side projects, and tinkering with random stuff.
-  </p>
+  <!-- Hero Section -->
+  <section class="pb-12">
+    <h1 class="text-4xl md:text-5xl font-bold pb-4 text-cyan-12">
+      Hi, I'm Anindito Bhagawanta
+    </h1>
+    <p class="text-xl md:text-2xl font-semibold pb-2 text-cyan-11">
+      You can call me Bhaga.
+    </p>
+    <p class="text-lg pb-4 max-w-2xl">
+      I'm a software engineer from Indonesia, building full-stack applications
+      and exploring the intersection of technology and creativity. When I'm not
+      coding, you'll find me playing video games, working on side projects, or
+      tinkering with random stuff.
+    </p>
+  </section>
+
+  <!-- Skills & Technologies Section -->
+  <section class="pb-8">
+    <h2 class="text-2xl font-bold pb-4">Skills & Technologies</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        Object.entries(SKILLS).map(([category, items]) => (
+          <div>
+            <h3 class="text-lg font-semibold pb-2 text-cyan-11 capitalize">
+              {category}
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {items.map((skill) => (
+                <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm">
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Featured Projects Section -->
+  {
+    featuredProjects.length > 0 && (
+      <section class="pb-8">
+        <div class="flex items-center justify-between pb-4">
+          <h2 class="text-2xl font-bold">Featured Projects</h2>
+          <a
+            href="/projects"
+            class="text-cyan-11 hover:text-cyan-12 underline text-sm"
+          >
+            View all →
+          </a>
+        </div>
+        <ul class="grid grid-cols-1 gap-4">
+          {featuredProjects.map((project) => (
+            <li class="border-l-2 border-cyan-6 hover:border-cyan-8 transition-colors">
+              <div class="p-4 hover:bg-slate-3 transition-colors">
+                <div class="flex items-start justify-between pb-2">
+                  <div class="flex-1">
+                    <h3 class="text-xl font-bold pb-1">{project.data.title}</h3>
+                    <p class="text-slate-11 pb-2">{project.data.description}</p>
+                    {project.data.tech && project.data.tech.length > 0 && (
+                      <div class="flex flex-wrap gap-2 pt-2">
+                        {project.data.tech.map((tech: string) => (
+                          <span class="px-2 py-0.5 bg-slate-4 text-slate-10 rounded text-xs">
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div class="flex gap-2 ml-4">
+                    {project.data.url && (
+                      <a
+                        href={project.data.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-cyan-11 hover:text-cyan-12 underline text-sm"
+                        aria-label={`Visit ${project.data.title}`}
+                      >
+                        Live
+                      </a>
+                    )}
+                    {project.data.github && (
+                      <a
+                        href={project.data.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-cyan-11 hover:text-cyan-12 underline text-sm"
+                        aria-label={`View ${project.data.title} on GitHub`}
+                      >
+                        Code
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <!-- Latest Blog Posts Section -->
+  {
+    latestPosts.length > 0 && (
+      <section class="pb-8">
+        <div class="flex items-center justify-between pb-4">
+          <h2 class="text-2xl font-bold">Latest Posts</h2>
+          <a
+            href="/blog"
+            class="text-cyan-11 hover:text-cyan-12 underline text-sm"
+          >
+            View all →
+          </a>
+        </div>
+        <ul class="grid grid-cols-1 gap-4">
+          {latestPosts.map((post) => (
+            <li class="border-l-2 border-cyan-6 hover:border-cyan-8 transition-colors">
+              <a href={`/blog/${post.slug}/`} class="block">
+                <div class="p-4 hover:bg-slate-3 transition-colors">
+                  <div class="flex w-full items-center justify-between pb-2">
+                    <h3 class="text-xl font-bold">{post.data.title}</h3>
+                    <p class="text-sm text-slate-11">
+                      <FormattedDate date={post.data.pubDate} />
+                    </p>
+                  </div>
+                  {post.data.description && (
+                    <p class="text-slate-11">{post.data.description}</p>
+                  )}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
+
+  <!-- Social Links Section -->
+  <section class="pb-8">
+    <h2 class="text-2xl font-bold pb-4">Connect</h2>
+    <nav>
+      <ul class="flex flex-wrap gap-4">
+        {
+          SOCIAL_LINKS.github && (
+            <li>
+              <a
+                href={SOCIAL_LINKS.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-cyan-11 hover:text-cyan-12 underline"
+              >
+                GitHub
+              </a>
+            </li>
+          )
+        }
+        {
+          SOCIAL_LINKS.twitter && (
+            <li>
+              <a
+                href={SOCIAL_LINKS.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-cyan-11 hover:text-cyan-12 underline"
+              >
+                Twitter
+              </a>
+            </li>
+          )
+        }
+        {
+          SOCIAL_LINKS.linkedin && (
+            <li>
+              <a
+                href={SOCIAL_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-cyan-11 hover:text-cyan-12 underline"
+              >
+                LinkedIn
+              </a>
+            </li>
+          )
+        }
+        {
+          SOCIAL_LINKS.email && (
+            <li>
+              <a
+                href={SOCIAL_LINKS.email}
+                class="text-cyan-11 hover:text-cyan-12 underline"
+              >
+                Email
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </nav>
+  </section>
+
+  <!-- Quick Links Section -->
+  <section class="pb-8">
+    <h2 class="text-2xl font-bold pb-4">Explore</h2>
+    <nav>
+      <ul class="flex flex-wrap gap-4">
+        <li>
+          <a href="/about" class="text-cyan-11 hover:text-cyan-12 underline">
+            About
+          </a>
+        </li>
+        <li>
+          <a href="/blog" class="text-cyan-11 hover:text-cyan-12 underline">
+            Blog
+          </a>
+        </li>
+        <li>
+          <a href="/projects" class="text-cyan-11 hover:text-cyan-12 underline">
+            Projects
+          </a>
+        </li>
+        <li>
+          <a href="/uses" class="text-cyan-11 hover:text-cyan-12 underline">
+            Uses
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </section>
 </Layout>

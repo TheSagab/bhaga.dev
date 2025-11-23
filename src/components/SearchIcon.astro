@@ -1,9 +1,10 @@
 ---
-import { Search as SearchLucide, X } from "@lucide/astro";
+import X from "@lucide/astro/icons/x";
+import SearchLucide from "@lucide/astro/icons/search";
 import Search from "astro-pagefind/components/Search";
 ---
 
-<button id="searchToggle" class="p-2 rounded hover:bg-mint-3 active:bg-mint-5">
+<button id="searchToggle" class="p-2 rounded hover:bg-cyan-3 active:bg-cyan-5">
   <SearchLucide size={15} />
 </button>
 
@@ -11,16 +12,16 @@ import Search from "astro-pagefind/components/Search";
 <dialog
   closedby="any"
   id="searchModal"
-  class="backdrop:bg-blackA-9 backdrop:backdrop-blur-sm p-0 rounded-lg max-w-[600px] w-[90%] max-h-[80vh] text-mint-12 top-1/5 left-1/2 -translate-x-1/2 -translate-y-1/2"
+  class="backdrop:bg-blackA-9 backdrop:backdrop-blur-sm p-0 rounded-lg max-w-[600px] w-[90%] max-h-[80vh] text-cyan-12 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
 >
   <div
-    class="bg-mint-1 border border-mint-6 rounded-lg shadow-lg flex flex-col overflow-hidden"
+    class="bg-cyan-1 border border-cyan-6 rounded-lg shadow-lg flex flex-col overflow-hidden"
   >
-    <div class="flex justify-between items-center p-4 border-b border-mint-6">
+    <div class="flex justify-between items-center p-4 border-b border-cyan-6">
       <h2 class="text-xl font-bold">Search</h2>
       <button
         id="searchClose"
-        class="p-2 rounded hover:bg-mint-3 active:bg-mint-5"
+        class="p-2 rounded hover:bg-cyan-3 active:bg-cyan-5"
       >
         <X size={20} />
       </button>
@@ -52,65 +53,65 @@ import Search from "astro-pagefind/components/Search";
 <style is:global>
   :root {
     --pagefind-ui-scale: 0.8;
-    --pagefind-ui-primary: var(--mint-1);
-    --pagefind-ui-text: #fff;
+    --pagefind-ui-primary: var(--cyan-1);
+    --pagefind-ui-text: var(--slate-12);
     --pagefind-ui-message-text: #000;
-    --pagefind-ui-result-title-text: var(--mint-1);
+    --pagefind-ui-result-title-text: var(--cyan-1);
     --pagefind-ui-result-text: #000;
-    --pagefind-ui-background: var(--mint-1);
-    --pagefind-input-background: var(--mint-1);
-    --pagefind-ui-border: var(--mint-1);
+    --pagefind-ui-background: var(--cyan-1);
+    --pagefind-input-background: var(--cyan-1);
+    --pagefind-ui-border: var(--cyan-1);
     --pagefind-ui-tag: #0d0a01;
     --pagefind-ui-border-width: 2px;
     --pagefind-ui-border-radius: 8px;
     --pagefind-ui-image-border-radius: 8px;
     --pagefind-ui-image-box-ratio: 3 / 2;
-    --pagefind-ui-font: sans-serif;
+    --pagefind-ui-font: var(--font-plus-jakarta-sans);
     --pagefind-button-background: var(--pagefind-input-background);
     --pagefind-button-color: var(--pagefind-ui-message-text);
   }
   [data-theme="light"] {
-    --pagefind-ui-primary: var(--mint-1);
-    --pagefind-ui-text: #fff;
-    --pagefind-ui-message-text: #000;
-    --pagefind-ui-result-title-text: var(--mint-1);
-    --pagefind-ui-result-text: #000;
-    --pagefind-ui-background: var(--mint-1);
-    --pagefind-input-background: var(--mint-1);
-    --pagefind-ui-border: var(--mint-1);
+    --pagefind-ui-primary: var(--slate-1);
+    --pagefind-ui-text: var(--slate-12);
+    --pagefind-ui-message-text: var(--slate-12);
+    --pagefind-ui-result-title-text: var(--slate-1);
+    --pagefind-ui-result-text: var(--slate-12);
+    --pagefind-ui-background: var(--slate-1);
+    --pagefind-input-background: var(--slate-1);
+    --pagefind-ui-border: var(--slate-1);
     --pagefind-ui-tag: #0d0a01;
-    --pagefind-button-color: var(--pagefind-ui-text);
+    --pagefind-button-color: var(--slate-12);
   }
   [data-theme="dark"] {
-    --pagefind-ui-primary: var(--mint-1);
-    --pagefind-ui-text: #fff;
-    --pagefind-ui-message-text: var(--pagefind-ui-text);
-    --pagefind-ui-result-title-text: var(--mint-1);
-    --pagefind-ui-result-text: #fff;
-    --pagefind-ui-background: var(--mint-1);
-    --pagefind-input-background: var(--mint-1);
-    --pagefind-ui-border: var(--mint-1);
-    --pagefind-ui-tag: var(--mint-1);
+    --pagefind-ui-primary: var(--slate-1);
+    --pagefind-ui-text: var(--slate-12);
+    --pagefind-ui-message-text: var(--slate-12);
+    --pagefind-ui-result-title-text: var(--slate-1);
+    --pagefind-ui-result-text: var(--slate-12);
+    --pagefind-ui-background: var(--slate-1);
+    --pagefind-input-background: var(--slate-1);
+    --pagefind-ui-border: var(--slate-1);
+    --pagefind-ui-tag: var(--slate-1);
   }
   #search .pagefind-ui__search-input,
   #search .pagefind-ui__search-clear {
     background-color: var(--pagefind-input-background);
-    color: var(--pagefind-ui-text);
+    color: var(--slate-12);
   }
   #search .pagefind-ui__result-title,
   #search .pagefind-ui__result-link {
     display: inline-block;
     font-weight: 700;
     font-size: calc(40px * var(--pagefind-ui-scale));
-    color: var(--pagefind-ui-result-title-text);
+    color: var(--slate-12);
   }
   #search .pagefind-ui__result-excerpt {
-    color: var(--pagefind-ui-result-text);
+    color: var(--slate-12);
     font-weight: 400;
     font-size: calc(1.5rem * var(--pagefind-ui-scale));
   }
   #search .pagefind-ui__message {
-    color: var(--pagefind-ui-message-text);
+    color: var(--slate-12);
     margin: calc(0.5rem * var(--pagefind-ui-scale)) 0
       calc(1.5rem * var(--pagefind-ui-scale))
       calc(0.5rem * var(--pagefind-ui-scale));
