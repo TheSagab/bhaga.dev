@@ -8,7 +8,7 @@ const { href, ...props } = Astro.props;
 const { pathname } = Astro.url;
 const isActive = href === pathname || href === pathname.replace(/\/$/, "");
 
-const className = "mx-2 px-2 py-2 text-center";
+const className = "mx-2 px-2 py-2 text-center hover:text-cyan-11 transition-colors";
 ---
 
 <a href={href} class:list={[className, isActive && "text-cyan-11"]} {...props}>

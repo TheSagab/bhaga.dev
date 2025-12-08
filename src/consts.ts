@@ -11,11 +11,3 @@ export const SOCIAL_LINKS = {
 	linkedin: 'https://linkedin.com/in/yourusername',
 	email: 'mailto:your.email@example.com',
 } as const;
-
-// Skills and Technologies
-export const SKILLS = {
-	'languages': ['JavaScript', 'TypeScript', 'Python', 'Java'],
-	'frontend': ['React', 'Astro', 'Vue', 'HTML', 'CSS', 'Tailwind CSS'],
-	'backend': ['Node.js', 'Express', 'PostgreSQL', 'MongoDB'],
-	'tools': ['Git', 'Docker', 'Linux', 'VS Code'],
-} as const;

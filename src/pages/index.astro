@@ -2,7 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
-import { SOCIAL_LINKS, SKILLS } from "../consts";
+import ReadingTime from "../components/ReadingTime.astro";
+import { SOCIAL_LINKS } from "../consts";
+import { Typescript, Python, Openjdk, Kotlin, Go, React, Solid, Astro as AstroIcon, Tailwindcss, Nextdotjs, Nodedotjs, Express, Postgresql, Mongodb, Git, Docker, Linux } from "simple-icons-astro";
 
 // Get latest 3 blog posts (newest first)
 const allPosts = (await getCollection("blog")).sort(
@@ -29,14 +31,14 @@ try {
 
 <Layout>
   <!-- Hero Section -->
-  <section class="pb-12">
+  <section class="pb-8">
     <h1 class="text-4xl md:text-5xl font-bold pb-4 text-cyan-12">
       Hi, I'm Anindito Bhagawanta
     </h1>
     <p class="text-xl md:text-2xl font-semibold pb-2 text-cyan-11">
       You can call me Bhaga.
     </p>
-    <p class="text-lg pb-4 max-w-2xl">
+    <p class="text-lg">
       I'm a software engineer from Indonesia, building full-stack applications
       and exploring the intersection of technology and creativity. When I'm not
       coding, you'll find me playing video games, working on side projects, or
@@ -48,22 +50,89 @@ try {
   <section class="pb-8">
     <h2 class="text-2xl font-bold pb-4">Skills & Technologies</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {
-        Object.entries(SKILLS).map(([category, items]) => (
-          <div>
-            <h3 class="text-lg font-semibold pb-2 text-cyan-11 capitalize">
-              {category}
-            </h3>
-            <div class="flex flex-wrap gap-2">
-              {items.map((skill) => (
-                <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))
-      }
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">Languages</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Typescript class="w-4 h-4" />
+            TypeScript
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Python class="w-4 h-4" />
+            Python
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Openjdk class="w-4 h-4" />
+            Java
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Kotlin class="w-4 h-4" />
+            Kotlin
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Go class="w-4 h-4" />
+            Go
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">Frontend</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <React class="w-4 h-4" />
+            React
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Solid class="w-4 h-4" />
+            Solid
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <AstroIcon class="w-4 h-4" />
+            Astro
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Tailwindcss class="w-4 h-4" />
+            Tailwind CSS
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Nextdotjs class="w-4 h-4" />
+            Next.js
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">Backend</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Nodedotjs class="w-4 h-4" />
+            Node.js
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Postgresql class="w-4 h-4" />
+            PostgreSQL
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">Tools</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Git class="w-4 h-4" />
+            Git
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Docker class="w-4 h-4" />
+            Docker
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Linux class="w-4 h-4" />
+            Linux
+          </span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -132,7 +201,7 @@ try {
   }
 
   <!-- Latest Blog Posts Section -->
-  {
+  <!-- {
     latestPosts.length > 0 && (
       <section class="pb-8">
         <div class="flex items-center justify-between pb-4">
@@ -144,28 +213,40 @@ try {
             View all →
           </a>
         </div>
-        <ul class="grid grid-cols-1 gap-4">
+        <ul class="grid grid-cols-1 gap-12">
           {latestPosts.map((post) => (
-            <li class="border-l-2 border-cyan-6 hover:border-cyan-8 transition-colors">
-              <a href={`/blog/${post.slug}/`} class="block">
-                <div class="p-4 hover:bg-slate-3 transition-colors">
-                  <div class="flex w-full items-center justify-between pb-2">
-                    <h3 class="text-xl font-bold">{post.data.title}</h3>
-                    <p class="text-sm text-slate-11">
-                      <FormattedDate date={post.data.pubDate} />
-                    </p>
-                  </div>
-                  {post.data.description && (
-                    <p class="text-slate-11">{post.data.description}</p>
-                  )}
-                </div>
-              </a>
+            <li>
+              <h3 class="text-4xl font-bold mb-2">
+                <a href={`/blog/${post.slug}/`} class="hover:underline">
+                  {post.data.title}
+                </a>
+              </h3>
+              <div class="flex items-center gap-4 mb-3 text-sm text-cyan-11">
+                <FormattedDate date={post.data.pubDate} />
+                <span>•</span>
+                <ReadingTime content={post.body} />
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <>
+                    <span>•</span>
+                    <div class="flex gap-2">
+                      {post.data.tags.map((tag) => (
+                        <a href={`/blog/tag/${tag}`} class="text-cyan-11 hover:text-cyan-12 transition-colors">
+                          #{tag}
+                        </a>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
+              {post.data.description && (
+                <p class="text-slate-11 leading-relaxed">{post.data.description}</p>
+              )}
             </li>
           ))}
         </ul>
       </section>
     )
-  }
+  } -->
 
   <!-- Social Links Section -->
   <section class="pb-8">
@@ -226,35 +307,6 @@ try {
             </li>
           )
         }
-      </ul>
-    </nav>
-  </section>
-
-  <!-- Quick Links Section -->
-  <section class="pb-8">
-    <h2 class="text-2xl font-bold pb-4">Explore</h2>
-    <nav>
-      <ul class="flex flex-wrap gap-4">
-        <li>
-          <a href="/about" class="text-cyan-11 hover:text-cyan-12 underline">
-            About
-          </a>
-        </li>
-        <li>
-          <a href="/blog" class="text-cyan-11 hover:text-cyan-12 underline">
-            Blog
-          </a>
-        </li>
-        <li>
-          <a href="/projects" class="text-cyan-11 hover:text-cyan-12 underline">
-            Projects
-          </a>
-        </li>
-        <li>
-          <a href="/uses" class="text-cyan-11 hover:text-cyan-12 underline">
-            Uses
-          </a>
-        </li>
       </ul>
     </nav>
   </section>

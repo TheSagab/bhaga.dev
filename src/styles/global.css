@@ -1,15 +1,4 @@
 @import "tailwindcss";
-/* @import "@radix-ui/colors/mint";
-@import "@radix-ui/colors/mint-alpha";
-@import "@radix-ui/colors/mint-dark";
-@import "@radix-ui/colors/mint-dark-alpha";
-@import "@radix-ui/colors/slate";
-@import "@radix-ui/colors/slate-alpha";
-@import "@radix-ui/colors/slate-dark";
-@import "@radix-ui/colors/slate-dark-alpha";
-
-@import "@radix-ui/colors/white-alpha";
-@import "@radix-ui/colors/black-alpha"; */
 
 @custom-variant dark (&:where(.dark, .dark *));
 

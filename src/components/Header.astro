@@ -1,20 +1,18 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
-import SearchIcon from "./SearchIcon.astro";
 import ThemeIcon from "./ThemeIcon.astro";
 import { SITE_TITLE } from "../consts";
 ---
 
 <header class="flex place-content-between place-items-center py-4">
-  <h2 class="text-2xl font-bold"><a href="/">{SITE_TITLE}</a></h2>
-  <nav class="flex items-center px-2">
+  <div class="text-2xl font-bold"><a href="/" class="hover:text-cyan-11 transition-colors">{SITE_TITLE}</a></div>
+  <nav class="flex items-center px-2" aria-label="Primary navigation">
     <HeaderLink href="/blog">Blog</HeaderLink>
     <HeaderLink href="/projects">Projects</HeaderLink>
     <HeaderLink href="/about">About</HeaderLink>
     <HeaderLink href="/uses">Uses</HeaderLink>
   </nav>
   <div>
-    <SearchIcon />
     <ThemeIcon />
   </div>
 </header>

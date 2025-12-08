@@ -3,7 +3,11 @@ import Sun from "@lucide/astro/icons/sun";
 import Moon from "@lucide/astro/icons/moon";
 ---
 
-<button id="themeToggle" class="p-2 rounded hover:bg-cyan-3 active:bg-cyan-5">
+<button
+  id="themeToggle"
+  class="p-2 rounded hover:bg-cyan-3 active:bg-cyan-5"
+  aria-label="Toggle theme"
+>
   <Sun class="sun-icon" size={15} />
   <Moon class="moon-icon" size={15} />
 </button>
