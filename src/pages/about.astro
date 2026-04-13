@@ -1,46 +1,255 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Typescript, Python, Openjdk, Kotlin, Go, React, Solid, Astro as AstroIcon, Tailwindcss, Nextdotjs, Nodedotjs, Postgresql, Git, Docker, Linux } from "simple-icons-astro";
 ---
 
 <Layout>
-  <p class="pb-4">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo
-    integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis
-    egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In
-    hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat.
-    Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu
-    non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim.
-    Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed
-    vulputate mi. Dictumst quisque sagittis purus sit amet.
-  </p>
+  <!-- Hero Section -->
+  <section class="pb-8">
+    <h1 class="text-4xl md:text-5xl font-bold pb-4 text-cyan-12">About</h1>
+    <p class="text-xl md:text-2xl font-semibold pb-2 text-cyan-11">
+      Software Engineer
+    </p>
+    <p class="text-lg">
+      I build robust, scalable full-stack applications with a focus on clean
+      architecture and exceptional user experiences.
+    </p>
+  </section>
 
-  <p class="pb-4">
-    Morbi tristique senectus et netus. Id semper risus in hendrerit gravida
-    rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus
-    sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris
-    rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus
-    dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis
-    massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius
-    morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras
-    ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est
-    ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa
-    ultricies mi.
-  </p>
+  <!-- Photo Placeholder (hidden for now, ready for future implementation) -->
+  <div class="hidden pb-8" id="photo-placeholder">
+    <!-- Photo will go here -->
+  </div>
 
-  <p class="pb-4">
-    Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque.
-    Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac
-    felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit
-    amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed
-    elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem
-    dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra.
-    Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum
-    consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus
-    ultricies tristique. Rhoncus dolor purus non enim praesent elementum
-    facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed
-    risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor
-    vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus
-    non. Amet dictum sit amet justo donec enim.
-  </p>
+  <!-- Background Section -->
+  <section class="pb-8">
+    <h2 class="text-2xl font-bold pb-4">Background</h2>
+    <p class="pb-4 text-lg leading-relaxed">
+      I'm a software engineer from Indonesia with a passion for building
+      full-stack applications that solve real problems. My journey into software
+      development began with a curiosity about how things work, which evolved
+      into a deep commitment to crafting well-designed, maintainable systems.
+    </p>
+    <p class="pb-4 text-lg leading-relaxed">
+      Throughout my career, I've worked across the entire stack, from designing
+      responsive user interfaces to architecting backend services and managing
+      infrastructure. I thrive in environments where I can take ownership of
+      projects from concept to deployment, ensuring quality at every layer.
+    </p>
+    <p class="text-lg leading-relaxed">
+      What drives my work is the intersection of technical excellence and
+      practical impact. I believe great software is not just about writing code,
+      but about understanding user needs, making thoughtful architectural
+      decisions, and building systems that are both powerful and maintainable.
+    </p>
+  </section>
+
+  <!-- Technical Expertise Section -->
+  <section class="pb-8">
+    <h2 class="text-2xl font-bold pb-4">Technical Expertise</h2>
+    
+    <!-- Problem Domains -->
+    <div class="pb-6">
+      <h3 class="text-lg font-semibold pb-3 text-cyan-11">Problem Domains</h3>
+      <ul class="space-y-3 text-lg leading-relaxed">
+        <li class="pl-4 border-l-2 border-slate-6">
+          <span class="font-semibold text-slate-12">Full-Stack Web Applications:</span>
+          <span class="text-slate-11"> Building end-to-end web solutions with modern frameworks, from responsive frontends to scalable backend APIs.</span>
+        </li>
+        <li class="pl-4 border-l-2 border-slate-6">
+          <span class="font-semibold text-slate-12">API Design & Development:</span>
+          <span class="text-slate-11"> Designing and implementing RESTful and GraphQL APIs with a focus on performance, security, and developer experience.</span>
+        </li>
+        <li class="pl-4 border-l-2 border-slate-6">
+          <span class="font-semibold text-slate-12">Database Architecture:</span>
+          <span class="text-slate-11"> Designing efficient data models and optimizing queries for both relational and NoSQL databases.</span>
+        </li>
+        <li class="pl-4 border-l-2 border-slate-6">
+          <span class="font-semibold text-slate-12">DevOps & Infrastructure:</span>
+          <span class="text-slate-11"> Containerization, CI/CD pipelines, and cloud deployment strategies for reliable, automated workflows.</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Development Approach -->
+    <div>
+      <h3 class="text-lg font-semibold pb-3 text-cyan-11">Development Approach</h3>
+      <ul class="space-y-3 text-lg leading-relaxed">
+        <li class="pl-4 border-l-2 border-cyan-6">
+          <span class="font-semibold text-slate-12">Code Quality:</span>
+          <span class="text-slate-11"> Writing clean, testable, and well-documented code that prioritizes maintainability and readability.</span>
+        </li>
+        <li class="pl-4 border-l-2 border-cyan-6">
+          <span class="font-semibold text-slate-12">Performance Optimization:</span>
+          <span class="text-slate-11"> Profiling and optimizing applications for speed, efficiency, and scalability.</span>
+        </li>
+        <li class="pl-4 border-l-2 border-cyan-6">
+          <span class="font-semibold text-slate-12">User-Centric Design:</span>
+          <span class="text-slate-11"> Building interfaces and experiences that are intuitive, accessible, and delightful to use.</span>
+        </li>
+        <li class="pl-4 border-l-2 border-cyan-6">
+          <span class="font-semibold text-slate-12">Continuous Learning:</span>
+          <span class="text-slate-11"> Staying current with emerging technologies and best practices in the rapidly evolving software landscape.</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Skills & Technologies Section -->
+  <section class="pb-8">
+    <h2 class="text-2xl font-bold pb-4">Skills & Technologies</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">Languages</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Typescript class="w-4 h-4" />
+            TypeScript
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Python class="w-4 h-4" />
+            Python
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Openjdk class="w-4 h-4" />
+            Java
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Kotlin class="w-4 h-4" />
+            Kotlin
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Go class="w-4 h-4" />
+            Go
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">Frontend</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <React class="w-4 h-4" />
+            React
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Solid class="w-4 h-4" />
+            Solid
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <AstroIcon class="w-4 h-4" />
+            Astro
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Tailwindcss class="w-4 h-4" />
+            Tailwind CSS
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Nextdotjs class="w-4 h-4" />
+            Next.js
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">Backend</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Nodedotjs class="w-4 h-4" />
+            Node.js
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Postgresql class="w-4 h-4" />
+            PostgreSQL
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">Tools</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Git class="w-4 h-4" />
+            Git
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Docker class="w-4 h-4" />
+            Docker
+          </span>
+          <span class="px-3 py-1 bg-slate-3 text-slate-11 rounded-md text-sm flex items-center gap-2">
+            <Linux class="w-4 h-4" />
+            Linux
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Current Focus Section -->
+  <section class="pb-8">
+    <h2 class="text-2xl font-bold pb-4">Current Focus</h2>
+    <div class="space-y-4 text-lg leading-relaxed">
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">What I'm Building</h3>
+        <p class="text-slate-11">
+          Currently focused on developing modern web applications using React,
+          TypeScript, and Node.js. I'm particularly interested in creating
+          developer tools and platforms that improve workflow efficiency and
+          code quality.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">What I'm Learning</h3>
+        <p class="text-slate-11">
+          Exploring advanced patterns in distributed systems, diving deeper into
+          performance optimization techniques, and experimenting with emerging
+          frontend frameworks like Solid and Astro. Also expanding my knowledge
+          in system design and cloud-native architectures.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold pb-2 text-cyan-11">Future Interests</h3>
+        <p class="text-slate-11">
+          Interested in contributing to open-source projects, exploring
+          WebAssembly for performance-critical applications, and building tools
+          that help developers ship better software faster. Always looking for
+          opportunities to work on challenging problems with talented teams.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connect Section -->
+  <section class="pb-8">
+    <h2 class="text-2xl font-bold pb-4">Let's Connect</h2>
+    <p class="text-lg leading-relaxed pb-4">
+      I'm always open to discussing new opportunities, collaborations, or
+      interesting technical challenges. Feel free to reach out if you'd like to
+      work together or just chat about technology.
+    </p>
+    <div class="flex flex-wrap gap-4">
+      <a
+        href="https://github.com/yourusername"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-cyan-11 hover:text-cyan-12 underline"
+      >
+        GitHub
+      </a>
+      <a
+        href="https://linkedin.com/in/yourusername"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-cyan-11 hover:text-cyan-12 underline"
+      >
+        LinkedIn
+      </a>
+      <a
+        href="mailto:your.email@example.com"
+        class="text-cyan-11 hover:text-cyan-12 underline"
+      >
+        Email
+      </a>
+    </div>
+  </section>
 </Layout>

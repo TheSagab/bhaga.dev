@@ -14,15 +14,16 @@ const { title, pubDate, updatedDate, body } = Astro.props;
 
 <Layout>
   <article>
-    <div class="pb-4">
-      <div class="flex items-center gap-4 text-sm text-cyan-11">
+    <header class="mb-8 pb-8 border-b border-slate-6">
+      <h1 class="text-4xl md:text-5xl font-bold text-slate-12 mb-4 tracking-tight leading-tight">{title}</h1>
+      <div class="flex items-center gap-3 text-sm text-slate-11">
         <FormattedDate date={pubDate} />
-        <span>•</span>
+        <span class="text-slate-9">•</span>
         <ReadingTime content={body} />
         {
           updatedDate && (
             <>
-              <span>•</span>
+              <span class="text-slate-9">•</span>
               <div>
                 Last updated on <FormattedDate date={updatedDate} />
               </div>
@@ -30,9 +31,7 @@ const { title, pubDate, updatedDate, body } = Astro.props;
           )
         }
       </div>
-      <h1 class="text-3xl font-bold pb-4">{title}</h1>
-      <hr />
-    </div>
+    </header>
     <Prose>
       <slot />
     </Prose>
