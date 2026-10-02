@@ -7,7 +7,8 @@ branches (`prototype/*`); `main` keeps only the decisions that were made.
 ## Palette: real Radix scales (SETTLED)
 
 **Decision:** `:root` and `.dark` in `global.css` hold the cyan, slate and gray
-scales converted verbatim from `@radix-ui/colors`. Regenerate them, never
+scales, converted from Radix to oklch. Each value carries the hex it came from
+in a trailing comment, so it can be checked and regenerated. Regenerate, never
 hand-tune.
 
 **Question it settled:** are these actually the Radix scales, or an
@@ -26,9 +27,15 @@ were two to three steps darker than Radix (page background `#0d0e11` vs
 Loud secondary text rather than washed-out, so it escaped notice.
 
 **How it is verified:** every value in `global.css` is checked to round-trip to
-the package's exact hex, so what ships is what Radix published rather than a
-re-derivation. Light body text now 15.98:1, dark 16.25:1; both themes pass WCAG
-AA for body and secondary text.
+the hex in its trailing comment, so what ships is Radix's published colour rather
+than a re-derivation. Light body text now 15.98:1, dark 16.25:1; both themes pass
+WCAG AA for body and secondary text.
+
+**No runtime dependency:** the package `@radix-ui/colors` was removed once the
+values were settled. It was only ever the source of the numbers, never imported,
+and keeping it implied the build depended on something it did not. To regenerate,
+reinstall it temporarily, convert its hex values to oklch, and delete it again.
+The scale is pinned by the trailing hex comments rather than by the package.
 
 **Prototype (primary source):** branch `prototype/light-palette`, route
 `/prototype/light`, switched with `?v=<old|radix|side>`. `old` keeps the previous
