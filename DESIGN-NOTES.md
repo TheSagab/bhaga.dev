@@ -26,6 +26,11 @@ code-heavy, with the prose measure tightened to ~68ch.
 **Prototype:** branch `prototype/font-choice` (commit `fa2caeb`). Site-wide
 switcher, `?type=A|B|C`, dev-only, mounted in `Layout.astro`.
 
+**Drift since:** the header wordmark and nav have moved to mono
+(`font-mono text-xl` / `font-mono text-sm`), so mono now carries the wordmark as
+well as the list's dates and tags. Mode C remains unimplemented for headings and
+body prose, which are still Jakarta. Revisit this decision with that in mind.
+
 ## Post list: ledger with linked tags (SETTLED)
 
 **Decision:** `src/components/PostList.astro` is the post list, used by the home
@@ -49,8 +54,8 @@ blurb are linked separately; the reading time and tags sit outside both. Verifie
 there are zero nested anchors across every built page.
 
 **Where tags appear:** the list (`PostList.astro`) shows them in the row's
-right-hand meta column, and each post page shows them once at the end of the
-article under a "Tagged" label. Both link to `/blog/tag/<tag>` with the same
+right-hand meta column, and each post page shows them above the title, so they
+read as context before the article. Both link to `/blog/tag/<tag>` with the same
 cyan-plus-underline hover, so a tag reads the same wherever it appears.
 
 **Knock-on changes:** `/blog` and `/blog/tag/[tag]` lost their large 4xl-title
