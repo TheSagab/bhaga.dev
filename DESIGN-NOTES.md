@@ -26,6 +26,17 @@ code-heavy, with the prose measure tightened to ~68ch.
 **Prototype:** branch `prototype/font-choice` (commit `fa2caeb`). Site-wide
 switcher, `?type=A|B|C`, dev-only, mounted in `Layout.astro`.
 
+## Home: post list, no spotlight
+
+**Decision:** the home page drops the "Latest post" spotlight panel and shows
+every post in the dated rail grouped by year. One list, no featured item.
+
+**Question it settles:** should the newest post get a promoted panel, or should
+the home page be a single flat log of posts?
+
+The rail's header link now reads "Blog index →" (it points at `/blog`, which
+still carries tags), since "All posts →" no longer distinguishes anything.
+
 ## Earlier prototypes (decided, folded in)
 
 - `prototype/home-redesign` (`afb1007`) settled as: latest post spotlight panel

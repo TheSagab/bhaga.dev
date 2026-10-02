@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import FormattedDate from "../components/FormattedDate.astro";
-import ReadingTime from "../components/ReadingTime.astro";
 import { NAME, NICKNAME, AT_HANDLE, SOCIAL_LINKS } from "../consts";
 
 // Monogram for the intro badge.
@@ -10,16 +8,13 @@ const initials = NAME.split(" ")
   .map((word) => word[0])
   .join("");
 
-// Newest first. The latest post gets the spotlight panel; the next few fill the
-// date rail below it.
+// Newest first, all of them, grouped by year so the rail reads as a log.
 const allPosts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
-const [lead, ...rest] = allPosts.slice(0, 5);
 
-// Grouped by year so the rail reads as a log.
-const byYear = new Map<string, typeof rest>();
-for (const post of rest) {
+const byYear = new Map<string, typeof allPosts>();
+for (const post of allPosts) {
   const year = String(post.data.pubDate.getFullYear());
   byYear.set(year, [...(byYear.get(year) ?? []), post]);
 }
@@ -70,50 +65,19 @@ const isoDate = (date: Date) =>
     </p>
   </section>
 
-  <!-- Latest post -->
+  <!-- All posts, as a dated rail grouped by year -->
   {
-    lead && (
-      <section class="pb-12">
-        <a href={`/blog/${lead.slug}/`} class="group block">
-          <article class="rounded-xl border border-slate-4 bg-slate-2 p-6 transition-colors group-hover:border-cyan-8 group-hover:bg-slate-3 md:p-8">
-            <p class="pb-3 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-11">
-              Latest post
-            </p>
-            <h2 class="pb-3 text-3xl font-bold leading-tight transition-colors group-hover:text-cyan-11 md:text-4xl">
-              {lead.data.title}
-            </h2>
-            <p class="max-w-2xl pb-5 leading-relaxed text-slate-11">
-              {lead.data.description}
-            </p>
-            <div class="flex flex-wrap items-center gap-3 text-sm text-slate-11">
-              <FormattedDate date={lead.data.pubDate} />
-              <span aria-hidden="true" class="text-slate-8">
-                ·
-              </span>
-              <ReadingTime content={lead.body} />
-              <span class="ml-auto font-semibold text-cyan-11">
-                Read post →
-              </span>
-            </div>
-          </article>
-        </a>
-      </section>
-    )
-  }
-
-  <!-- More posts, as a dated rail grouped by year -->
-  {
-    rest.length > 0 && (
+    allPosts.length > 0 && (
       <section class="pb-8">
         <div class="flex items-baseline justify-between border-b border-slate-6 pb-3 text-sm">
           <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-11">
-            More posts
+            Posts
           </h2>
           <a
             href="/blog"
             class="text-cyan-11 transition-colors hover:text-cyan-12"
           >
-            All posts →
+            Blog index →
           </a>
         </div>
 
