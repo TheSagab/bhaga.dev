@@ -27,7 +27,7 @@ const { tag } = Astro.params;
 // Filter posts by the selected tag
 const filteredPosts = allPosts
   .filter((post) => post.data.tags?.includes(tag))
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .sort((a, b) => b.data.pubDate.localeCompare(a.data.pubDate));
 
 // Collect all tags
 const tagCounts = new Map<string, number>();

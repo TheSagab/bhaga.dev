@@ -12,7 +12,7 @@ const initials = NAME.split(" ")
 // Newest first. The home page is a short recent list; the full archive lives
 // at /blog.
 const allPosts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  (a, b) => b.data.pubDate.localeCompare(a.data.pubDate)
 );
 
 const HOME_LIMIT = 5;

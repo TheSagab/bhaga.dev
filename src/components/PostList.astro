@@ -22,13 +22,6 @@ interface Props {
 
 const { posts } = Astro.props;
 
-// Local YYYY-MM-DD, so the column stays a fixed width.
-const isoDate = (date: Date) =>
-  [
-    date.getFullYear(),
-    String(date.getMonth() + 1).padStart(2, "0"),
-    String(date.getDate()).padStart(2, "0"),
-  ].join("-");
 ---
 
 <ul class="border-t border-slate-4">
@@ -37,10 +30,10 @@ const isoDate = (date: Date) =>
       <li class="border-b border-slate-4">
         <div class="grid grid-cols-[5rem_1fr] gap-x-5 py-3.5">
           <time
-            datetime={post.data.pubDate.toISOString()}
+            datetime={post.data.pubDate}
             class="pt-1 font-mono text-xs text-slate-11"
           >
-            {isoDate(post.data.pubDate)}
+            {post.data.pubDate}
           </time>
           <div class="min-w-0">
             <div class="flex items-baseline gap-x-3">

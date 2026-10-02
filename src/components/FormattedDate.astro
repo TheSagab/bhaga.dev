@@ -1,17 +1,26 @@
 ---
+/**
+ * Renders a date-only string (`YYYY-MM-DD`) as a human date, e.g. "8 Jul 2022".
+ *
+ * Takes the string rather than a Date on purpose. Formatting a Date here would
+ * route a calendar date through a timezone: `new Date("2022-07-08")` is UTC
+ * midnight, and `toLocaleDateString` in a negative-offset timezone would print
+ * the 7th. Parsing the digits directly cannot drift, whatever the build machine
+ * is set to.
+ */
 interface Props {
-  date: Date;
+  date: string;
 }
 
 const { date } = Astro.props;
+
+const MONTHS = [
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+const [year, month, day] = date.split("-");
+const label = `${Number(day)} ${MONTHS[Number(month) - 1]} ${year}`;
 ---
 
-<time datetime={date.toISOString()}>
-  {
-    date.toLocaleDateString("en-GB", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    })
-  }
-</time>
+<time datetime={date}>{label}</time>

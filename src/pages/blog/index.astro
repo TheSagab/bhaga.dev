@@ -7,7 +7,7 @@ const allPosts = await getCollection("blog");
 
 // Sort posts by date
 const sortedPosts = allPosts.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  (a, b) => b.data.pubDate.localeCompare(a.data.pubDate)
 );
 
 // Collect all tags
