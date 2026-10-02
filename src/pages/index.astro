@@ -8,13 +8,17 @@ const initials = NAME.split(" ")
   .map((word) => word[0])
   .join("");
 
-// Newest first, all of them, grouped by year so the rail reads as a log.
+// Newest first. The home page is a short recent list; the full archive lives
+// at /blog.
 const allPosts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-const byYear = new Map<string, typeof allPosts>();
-for (const post of allPosts) {
+const HOME_LIMIT = 5;
+const recentPosts = allPosts.slice(0, HOME_LIMIT);
+
+const byYear = new Map<string, typeof recentPosts>();
+for (const post of recentPosts) {
   const year = String(post.data.pubDate.getFullYear());
   byYear.set(year, [...(byYear.get(year) ?? []), post]);
 }
@@ -65,19 +69,19 @@ const isoDate = (date: Date) =>
     </p>
   </section>
 
-  <!-- All posts, as a dated rail grouped by year -->
+  <!-- The most recent posts, as a dated rail grouped by year -->
   {
-    allPosts.length > 0 && (
+    recentPosts.length > 0 && (
       <section class="pb-8">
         <div class="flex items-baseline justify-between border-b border-slate-6 pb-3 text-sm">
           <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-11">
-            Posts
+            Recent posts
           </h2>
           <a
             href="/blog"
             class="text-cyan-11 transition-colors hover:text-cyan-12"
           >
-            Blog index →
+            All posts →
           </a>
         </div>
 

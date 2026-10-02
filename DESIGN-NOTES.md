@@ -34,8 +34,20 @@ every post in the dated rail grouped by year. One list, no featured item.
 **Question it settles:** should the newest post get a promoted panel, or should
 the home page be a single flat log of posts?
 
-The rail's header link now reads "Blog index →" (it points at `/blog`, which
-still carries tags), since "All posts →" no longer distinguishes anything.
+The rail's header link reads "All posts →" (it points at `/blog`, which still
+carries tags).
+
+## Home: how many posts to show
+
+**Decision:** the home page shows the 5 most recent posts and links to `/blog`
+for the rest. `/blog` is the full archive.
+
+**Question it settles:** should the home page carry every post, or a short
+recent list?
+
+A flat rail of everything does not stay readable as the archive grows, and the
+year grouping stopped meaning anything once every post landed in one year. The
+cap is a single `HOME_LIMIT` constant in `src/pages/index.astro`.
 
 ## Earlier prototypes (decided, folded in)
 
