@@ -127,3 +127,20 @@
   --color-gray-11: var(--gray-11);
   --color-gray-12: var(--gray-12);
 }
+
+/*
+ * Reading measure.
+ *
+ * Post bodies render through `.prose` with `max-w-none`, which removes the
+ * typography plugin's own 65ch cap. Uncapped, body text runs the full 864px
+ * column: about 96 characters per line at 1.125rem, well past the comfortable
+ * 60-70, and the same problem the page had for mono body copy.
+ *
+ * Scoped to running text rather than the container, so the element still fills
+ * the column for full-bleed content (images, tables) while every block of prose
+ * stops at a readable width. This lives here, not in BlogProse.astro, because
+ * a <style> block in that component does not survive the build.
+ */
+.prose :where(p, li, figcaption, blockquote, dt, dd) {
+  max-width: 65ch;
+}

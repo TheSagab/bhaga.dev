@@ -3,7 +3,9 @@
 ---
 
 <div
-  class="max-w-none prose prose-lg
+  /* The reading measure is capped in global.css (.prose > *), because a
+     <style> block in this component does not survive the build. */
+  class="prose prose-lg max-w-none
   prose-headings:font-bold prose-headings:text-slate-12 prose-headings:tracking-tight
   prose-h1:text-4xl prose-h1:mb-4
   prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-slate-6 prose-h2:pb-2
