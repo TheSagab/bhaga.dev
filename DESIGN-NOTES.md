@@ -4,6 +4,43 @@ Running log of design decisions on this site, including the ones that were
 prototyped and then deliberately parked. Prototype code lives on throwaway
 branches (`prototype/*`); `main` keeps only the decisions that were made.
 
+## Dates: date-only strings (SETTLED)
+
+**Decision:** `pubDate` and `updatedDate` are `YYYY-MM-DD` and stay strings. The
+schema rejects anything else (`expected a YYYY-MM-DD date`), so a free-form date
+fails the build rather than being coerced.
+
+**Question it settled:** what is a post's date? A calendar date, not an instant.
+The schema used `z.coerce.date()`, which accepted free-form strings and produced
+a `Date`, and that quietly made dates depend on the machine. `Jul 08 2022` parsed
+in the build's timezone became `2022-07-07T17:00:00.000Z` here, so:
+
+- the `<time datetime>` attribute said the 7th for a post dated the 8th;
+- the RSS feed published `Thu, 07 Jul 2022 17:00:00 GMT`;
+- the visible date was correct only while the content cache was synced in the
+  same timezone as the render, and drifted by a day when those differed, which
+  happens in CI where content is synced locally and built in a container set to
+  UTC. I observed that drift before the change.
+
+Keeping the string makes all three independent of where the build runs.
+
+**Consumers changed:** `FormattedDate` now takes the string and formats it by
+reading the digits, instead of `toLocaleDateString` on a Date. The three list
+sorts compare with `localeCompare`, which for ISO dates is chronological order.
+`PostList` writes the string straight into `datetime`. The RSS integration still
+coerces to a Date for its own schema, which yields the exact date at UTC midnight.
+
+**Verified:** builds under UTC, UTC-10, UTC-5 and UTC+7 produce byte-identical
+dates. Diffed against a pre-change build, every difference in the whole site is
+confined to the date value inside `datetime` attributes and `rss.xml`; no visible
+text, class or link changed.
+
+**Gotcha worth remembering:** the content cache (`.astro/data-store.json`) kept
+serving the old `Date` values after the schema changed, so the dev server
+type-errored on stale data even though the schema was correct. Moving the store
+aside and re-syncing fixed it. If a content type looks wrong after a schema
+change, clear that file before debugging anything else.
+
 ## Projects: card grid, no dates (SETTLED)
 
 **Decision:** `/projects` is a two-column grid of cards, and each project has its
