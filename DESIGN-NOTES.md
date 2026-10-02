@@ -26,6 +26,30 @@ code-heavy, with the prose measure tightened to ~68ch.
 **Prototype:** branch `prototype/font-choice` (commit `fa2caeb`). Site-wide
 switcher, `?type=A|B|C`, dev-only, mounted in `Layout.astro`.
 
+## Post list: ledger with linked tags (SETTLED)
+
+**Decision:** `src/components/PostList.astro` is the post list, used by the home
+page (5 most recent), `/blog` (full archive) and every `/blog/tag/[tag]` page.
+
+**Question it settled:** how compact should the list be, and what belongs in a
+row? A fixed monospace date column, then title / blurb, with reading time and
+linked tags in a right-hand meta column. No background change on hover: only the
+link targets respond, which keeps a long archive calm.
+
+**Prototype:** branch `prototype/blog-list`, route `/prototype/blog-list`. Four
+shapes were built (ledger / chevron / rail / editorial), narrowed to the ledger,
+then variants E and F added reading time and tag links. F won.
+
+**Constraint to keep:** tags are links, so the row cannot be one big anchor.
+`<a>` inside `<a>` is invalid and browsers break it apart. The title and the
+blurb are linked separately; the reading time and tags sit outside both. Verified
+there are zero nested anchors across every built page.
+
+**Knock-on changes:** `/blog` and `/blog/tag/[tag]` lost their large 4xl-title
+cards for this list, which is what made the archive compact. `FormattedDate` is
+no longer used by any list (the component emits its own ISO date); it is still
+used by `BlogPost`.
+
 ## Home: post list, no spotlight
 
 **Decision:** the home page drops the "Latest post" spotlight panel and shows

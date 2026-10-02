@@ -1,8 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import type { GetStaticPaths } from "astro";
-import FormattedDate from "../../../components/FormattedDate.astro";
-import ReadingTime from "../../../components/ReadingTime.astro";
+import PostList from "../../../components/PostList.astro";
 import Layout from "../../../layouts/Layout.astro";
 
 export const getStaticPaths = (async () => {
@@ -72,36 +71,6 @@ const sortedTags = Array.from(tagCounts.entries()).sort((a, b) =>
       </div>
     </div>
 
-    <ul class="grid grid-cols-1 gap-12">
-      {
-        filteredPosts.map((post) => (
-          <li>
-            <h2 class="text-4xl font-bold mb-2">
-              <a href={`/blog/${post.slug}/`} class="hover:underline">
-                {post.data.title}
-              </a>
-            </h2>
-            <div class="flex items-center gap-4 mb-3 text-sm text-cyan-11">
-              <FormattedDate date={post.data.pubDate} />
-              <span>•</span>
-              <ReadingTime content={post.body} />
-              {post.data.tags && post.data.tags.length > 0 && (
-                <>
-                  <span>•</span>
-                  <div class="flex gap-2">
-                    {post.data.tags.map((postTag) => (
-                      <a href={`/blog/tag/${postTag}`} class="text-cyan-11 hover:text-cyan-12">
-                        #{postTag}
-                      </a>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-            <p class="text-slate-11 leading-relaxed">{post.data.description}</p>
-          </li>
-        ))
-      }
-    </ul>
+    <PostList posts={filteredPosts} />
   </section>
 </Layout>

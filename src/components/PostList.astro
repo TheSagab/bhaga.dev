@@ -1,0 +1,75 @@
+---
+/**
+ * The dated post list used by the home page and by /blog.
+ *
+ * Shape ("variant F" from the post-list prototype, branch `prototype/blog-list`):
+ * a fixed monospace date column, then title / blurb / tags. Reading time and tags
+ * sit in a right-hand meta column.
+ *
+ * Tags are real links, so the row cannot be one big anchor: `<a>` inside `<a>` is
+ * invalid and browsers break it apart. The title and the blurb are linked
+ * separately instead. Keep that shape if the row gains more clickable parts.
+ *
+ * There is deliberately no background change on hover. Only the link targets
+ * respond, which keeps a long archive list calm.
+ */
+import type { CollectionEntry } from "astro:content";
+import ReadingTime from "./ReadingTime.astro";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+
+// Local YYYY-MM-DD, so the column stays a fixed width.
+const isoDate = (date: Date) =>
+  [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-");
+---
+
+<ul class="border-t border-slate-4">
+  {
+    posts.map((post) => (
+      <li class="border-b border-slate-4">
+        <div class="grid grid-cols-[5rem_1fr] gap-x-5 py-3.5">
+          <time
+            datetime={post.data.pubDate.toISOString()}
+            class="pt-1 font-mono text-xs text-slate-11"
+          >
+            {isoDate(post.data.pubDate)}
+          </time>
+          <div class="min-w-0">
+            <div class="flex items-baseline gap-x-3">
+              <a
+                href={`/blog/${post.slug}/`}
+                class="font-semibold leading-snug transition-colors hover:text-cyan-11"
+              >
+                {post.data.title}
+              </a>
+              <span class="ml-auto hidden shrink-0 items-baseline gap-3 pt-1 font-mono text-[11px] text-slate-11 sm:flex">
+                <ReadingTime content={post.body} />
+                {post.data.tags?.map((tag) => (
+                  <a
+                    href={`/blog/tag/${tag}`}
+                    class="text-cyan-11 transition-colors hover:text-cyan-12 hover:underline"
+                  >
+                    #{tag}
+                  </a>
+                ))}
+              </span>
+            </div>
+            <a href={`/blog/${post.slug}/`} class="block">
+              <p class="line-clamp-2 pt-1 text-sm leading-relaxed text-slate-11">
+                {post.data.description}
+              </p>
+            </a>
+          </div>
+        </div>
+      </li>
+    ))
+  }
+</ul>

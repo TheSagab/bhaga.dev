@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PostList from "../components/PostList.astro";
 import { getCollection } from "astro:content";
 import { NAME, NICKNAME, AT_HANDLE, SOCIAL_LINKS } from "../consts";
 
@@ -16,21 +17,6 @@ const allPosts = (await getCollection("blog")).sort(
 
 const HOME_LIMIT = 5;
 const recentPosts = allPosts.slice(0, HOME_LIMIT);
-
-const byYear = new Map<string, typeof recentPosts>();
-for (const post of recentPosts) {
-  const year = String(post.data.pubDate.getFullYear());
-  byYear.set(year, [...(byYear.get(year) ?? []), post]);
-}
-const years = Array.from(byYear.entries());
-
-// Local YYYY-MM-DD for the monospace rail.
-const isoDate = (date: Date) =>
-  [
-    date.getFullYear(),
-    String(date.getMonth() + 1).padStart(2, "0"),
-    String(date.getDate()).padStart(2, "0"),
-  ].join("-");
 ---
 
 <Layout>
@@ -69,7 +55,7 @@ const isoDate = (date: Date) =>
     </p>
   </section>
 
-  <!-- The most recent posts, as a dated rail grouped by year -->
+  <!-- The most recent posts -->
   {
     recentPosts.length > 0 && (
       <section class="pb-8">
@@ -85,36 +71,7 @@ const isoDate = (date: Date) =>
           </a>
         </div>
 
-        {years.map(([year, yearPosts]) => (
-          <div class="pt-8">
-            <h3 class="pb-3 font-mono text-sm text-slate-11">{year}/</h3>
-            <ul>
-              {yearPosts.map((post) => (
-                <li>
-                  <a
-                    href={`/blog/${post.slug}/`}
-                    class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 border-t border-slate-4 py-4 transition-colors hover:bg-slate-2"
-                  >
-                    <time
-                      datetime={post.data.pubDate.toISOString()}
-                      class="font-mono text-sm text-slate-11"
-                    >
-                      {isoDate(post.data.pubDate)}
-                    </time>
-                    <span class="text-lg font-semibold leading-snug transition-colors group-hover:text-cyan-11">
-                      {post.data.title}
-                    </span>
-                    <span class="hidden gap-3 font-mono text-xs text-cyan-11 sm:flex">
-                      {post.data.tags?.map((tag) => (
-                        <span>#{tag}</span>
-                      ))}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <PostList posts={recentPosts} />
       </section>
     )
   }
