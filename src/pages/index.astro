@@ -3,21 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import ReadingTime from "../components/ReadingTime.astro";
-import PrototypeSwitcher from "../components/prototype/PrototypeSwitcher.astro";
-import IntroVariantA from "../components/prototype/home/IntroVariantA.astro";
-import IntroVariantB from "../components/prototype/home/IntroVariantB.astro";
-import IntroVariantC from "../components/prototype/home/IntroVariantC.astro";
+import { NAME, NICKNAME, AT_HANDLE, SOCIAL_LINKS } from "../consts";
 
-// PROTOTYPE — introduction redesign only. Three shapes for the intro (full name,
-// nickname, handle), swapped in the browser via ?variant=A|B|C. The post
-// sections below are the real, already-folded design and are not part of the
-// experiment. Delete the switcher and the losing variants once a winner is in.
-
-const INTRO_VARIANTS = [
-  { key: "A", label: "Masthead" },
-  { key: "B", label: "Profile row" },
-  { key: "C", label: "Spec rail" },
-];
+// Monogram for the intro badge.
+const initials = NAME.split(" ")
+  .map((word) => word[0])
+  .join("");
 
 // Newest first. The latest post gets the spotlight panel; the next few fill the
 // date rail below it.
@@ -44,17 +35,40 @@ const isoDate = (date: Date) =>
 ---
 
 <Layout>
-  <!-- Introduction (prototype: ?variant=A|B|C) -->
-  <div data-variant-panel="A">
-    <IntroVariantA />
-  </div>
-  <div data-variant-panel="B" hidden>
-    <IntroVariantB />
-  </div>
-  <div data-variant-panel="C" hidden>
-    <IntroVariantC />
-  </div>
-  <PrototypeSwitcher variants={INTRO_VARIANTS} current="A" />
+  <!-- Introduction -->
+  <section class="pb-12">
+    <div class="flex items-start gap-5">
+      <div
+        aria-hidden="true"
+        class="grid size-16 shrink-0 place-items-center rounded-full bg-cyan-3 font-mono text-xl font-bold text-cyan-11"
+      >
+        {initials}
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold tracking-tight text-cyan-12 md:text-4xl">
+          {NAME}
+        </h1>
+        <div class="flex flex-wrap items-center gap-3 pt-2 font-mono text-sm">
+          <span class="text-slate-11">{NICKNAME}</span>
+          <span aria-hidden="true" class="text-slate-8">/</span>
+          <a
+            href={SOCIAL_LINKS.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-cyan-11 transition-colors hover:text-cyan-12"
+          >
+            {AT_HANDLE}
+          </a>
+        </div>
+      </div>
+    </div>
+    <p class="max-w-2xl pt-6 text-lg">
+      I'm a software engineer from Indonesia, building full-stack applications
+      and exploring the intersection of technology and creativity. When I'm not
+      coding, you'll find me playing video games, working on side projects, or
+      tinkering with random stuff.
+    </p>
+  </section>
 
   <!-- Latest post -->
   {

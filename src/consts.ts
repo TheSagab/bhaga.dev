@@ -5,11 +5,12 @@ export const SITE_TITLE = 'Anindito Bhagawanta';
 export const SITE_DESCRIPTION = 'Welcome to my website!';
 
 // Identity
-// The full name is the site title above; these are the short forms shown on
-// the home page introduction.
 export const NAME = 'Anindito Bhagawanta';
 export const NICKNAME = 'Bhaga';
-export const HANDLE = '@TheSagab';
+// Social handle, without the leading @ — also used as the header wordmark.
+export const HANDLE = 'TheSagab';
+// The handle as displayed beside the nickname.
+export const AT_HANDLE = `@${HANDLE}`;
 
 // Social links
 export const SOCIAL_LINKS = {
