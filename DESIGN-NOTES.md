@@ -36,9 +36,12 @@ row? A fixed monospace date column, then title / blurb, with reading time and
 linked tags in a right-hand meta column. No background change on hover: only the
 link targets respond, which keeps a long archive calm.
 
-**Prototype:** branch `prototype/blog-list`, route `/prototype/blog-list`. Four
-shapes were built (ledger / chevron / rail / editorial), narrowed to the ledger,
-then variants E and F added reading time and tag links. F won.
+**Prototype (primary source):** branch `prototype/blog-list`, route
+`/prototype/blog-list`, switched with `?s=<A|B|E|F>.<home|blog>.<real|long>`.
+Four shapes were built (ledger / chevron / rail / editorial), narrowed to the
+ledger, then E added reading time and F added tag links. F won. That branch also
+carries the fixture posts used to judge the list at 20 posts; they are
+prototype-only and do not belong here.
 
 **Constraint to keep:** tags are links, so the row cannot be one big anchor.
 `<a>` inside `<a>` is invalid and browsers break it apart. The title and the
