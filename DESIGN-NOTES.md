@@ -4,6 +4,38 @@ Running log of design decisions on this site, including the ones that were
 prototyped and then deliberately parked. Prototype code lives on throwaway
 branches (`prototype/*`); `main` keeps only the decisions that were made.
 
+## Palette: real Radix scales (SETTLED)
+
+**Decision:** `:root` and `.dark` in `global.css` hold the cyan, slate and gray
+scales converted verbatim from `@radix-ui/colors`. Regenerate them, never
+hand-tune.
+
+**Question it settled:** are these actually the Radix scales, or an
+approximation? They were an approximation. Two things were wrong:
+
+- Cyan was pinned at hue 210 for every step. Radix cyan runs 203-222, shifting
+  blue-ward as it darkens. A flat hue makes the light steps mint-ish and the dark
+  steps under-saturated.
+- `slate-12`, the body and heading colour, was a mid grey instead of near-black.
+  Light-mode body text measured 9.9:1 against the page instead of 16:1, which is
+  what made light mode look washed out.
+
+The dark theme was off too, in the other direction: `slate-1` through `slate-10`
+were two to three steps darker than Radix (page background `#0d0e11` vs
+`#111113`), while `slate-11` was much lighter, at 12.6:1 where Radix intends 9:1.
+Loud secondary text rather than washed-out, so it escaped notice.
+
+**How it is verified:** every value in `global.css` is checked to round-trip to
+the package's exact hex, so what ships is what Radix published rather than a
+re-derivation. Light body text now 15.98:1, dark 16.25:1; both themes pass WCAG
+AA for body and secondary text.
+
+**Prototype (primary source):** branch `prototype/light-palette`, route
+`/prototype/light`, switched with `?v=<old|radix|side>`. `old` keeps the previous
+hand-tuned values so the change can be seen, `side` shows both at once. Toggle
+the site's dark mode while on `side` to check the dark scales. Run with
+`pnpm dev` (the route is on-demand rendered).
+
 ## Type: main font, PARKED (revisit later)
 
 **Decision:** keep Plus Jakarta Sans as the main font for now (Mode A in the
