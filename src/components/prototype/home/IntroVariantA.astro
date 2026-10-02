@@ -1,0 +1,34 @@
+---
+/**
+ * PROTOTYPE VARIANT A — "Masthead".
+ * Editorial title block: full name as the display line, nickname as the
+ * standfirst right under it, handle as a monospace pill, then a hairline and the
+ * bio. Closest to the current hero, just made explicit about all three names.
+ */
+import { NAME, NICKNAME, HANDLE, SOCIAL_LINKS } from "../../../consts";
+---
+
+<section class="pb-12">
+  <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-cyan-12">
+    {NAME}
+  </h1>
+  <p class="pt-3 text-xl md:text-2xl font-semibold text-cyan-11">
+    You can call me {NICKNAME}.
+  </p>
+  <div class="pt-4">
+    <a
+      href={SOCIAL_LINKS.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex items-center gap-2 rounded-full border border-slate-6 px-3 py-1 font-mono text-sm text-slate-11 transition-colors hover:border-cyan-8 hover:text-cyan-11"
+    >
+      {HANDLE}
+    </a>
+  </div>
+  <p class="max-w-2xl border-t border-slate-6 pt-6 mt-6 text-lg">
+    I'm a software engineer from Indonesia, building full-stack applications and
+    exploring the intersection of technology and creativity. When I'm not
+    coding, you'll find me playing video games, working on side projects, or
+    tinkering with random stuff.
+  </p>
+</section>

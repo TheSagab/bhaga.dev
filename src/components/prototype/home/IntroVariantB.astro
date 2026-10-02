@@ -1,0 +1,47 @@
+---
+/**
+ * PROTOTYPE VARIANT B — "Profile row".
+ * Identity as a compact social-profile header: monogram badge, full name, then
+ * nickname and handle sharing one monospace meta line. Bio sits underneath,
+ * outside the row. Highest information density at the top of the page.
+ */
+import { NAME, NICKNAME, HANDLE, SOCIAL_LINKS } from "../../../consts";
+
+const initials = NAME.split(" ")
+  .map((word) => word[0])
+  .join("");
+---
+
+<section class="pb-12">
+  <div class="flex items-start gap-5">
+    <div
+      aria-hidden="true"
+      class="grid size-16 shrink-0 place-items-center rounded-full bg-cyan-3 font-mono text-xl font-bold text-cyan-11"
+    >
+      {initials}
+    </div>
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight text-cyan-12 md:text-4xl">
+        {NAME}
+      </h1>
+      <div class="flex flex-wrap items-center gap-3 pt-2 font-mono text-sm">
+        <span class="text-slate-11">{NICKNAME}</span>
+        <span aria-hidden="true" class="text-slate-8">/</span>
+        <a
+          href={SOCIAL_LINKS.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-cyan-11 transition-colors hover:text-cyan-12"
+        >
+          {HANDLE}
+        </a>
+      </div>
+    </div>
+  </div>
+  <p class="max-w-2xl pt-6 text-lg">
+    I'm a software engineer from Indonesia, building full-stack applications and
+    exploring the intersection of technology and creativity. When I'm not
+    coding, you'll find me playing video games, working on side projects, or
+    tinkering with random stuff.
+  </p>
+</section>
