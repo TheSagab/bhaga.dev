@@ -1,10 +1,26 @@
 ---
-// import { getCollection } from "astro:content";
+import { getCollection } from "astro:content";
+import ProjectList from "../../components/ProjectList.astro";
 import Layout from "../../layouts/Layout.astro";
 
-// const posts = (await getCollection("blog")).sort(
-//   (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
-// );
+// Alphabetical by title: a project is ongoing rather than dated, so there is no
+// meaningful "newest first" here.
+const projects = (await getCollection("projects")).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
 ---
 
-<Layout />
+<Layout>
+  <section class="pb-8">
+    <div class="flex items-baseline justify-between border-b border-slate-6 pb-3 text-sm">
+      <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-11">
+        Projects
+      </h2>
+      <span class="font-mono text-xs text-slate-11">{projects.length}</span>
+    </div>
+
+    <div class="pt-6">
+      <ProjectList projects={projects} />
+    </div>
+  </section>
+</Layout>

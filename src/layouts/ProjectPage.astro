@@ -1,0 +1,87 @@
+---
+/**
+ * A single project page.
+ *
+ * Shape from the "cards" variant of the prototype (branch `prototype/projects`):
+ * a boxed summary card carrying the title, description, tech chips and links,
+ * then the project body as prose.
+ *
+ * The summary card exists so the links are reachable from the top of the page:
+ * a project body tends to be long, and the outbound URL is the point of it.
+ */
+import type { CollectionEntry } from "astro:content";
+import Prose from "../components/BlogProse.astro";
+import Layout from "./Layout.astro";
+
+type Props = CollectionEntry<"projects">["data"];
+
+const { title, description, url, github, tech } = Astro.props;
+
+const host = (u: string) => u.replace(/^https?:\/\//, "").replace(/\/$/, "");
+---
+
+<Layout>
+  <article>
+    <div class="rounded-lg border border-slate-4 bg-slate-2 p-5">
+      <p class="font-mono text-[11px] uppercase tracking-[0.2em] text-slate-11">
+        Project
+      </p>
+      <h1 class="pt-1 text-3xl font-bold tracking-tight text-slate-12">
+        {title}
+      </h1>
+      <p class="max-w-[65ch] pt-2 text-sm leading-relaxed text-slate-11">
+        {description}
+      </p>
+
+      {tech && tech.length > 0 && (
+        <div class="flex flex-wrap gap-2 pt-4">
+          {tech.map((t) => (
+            <span class="rounded bg-slate-3 px-1.5 py-0.5 font-mono text-[11px] text-slate-11">
+              {t}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {(url || github) && (
+        <div class="flex flex-wrap gap-4 pt-4 font-mono text-sm">
+          {url && (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-cyan-11 transition-colors hover:text-cyan-12 hover:underline"
+            >
+              {host(url)}
+            </a>
+          )}
+          {github && (
+            <a
+              href={github}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-cyan-11 transition-colors hover:text-cyan-12 hover:underline"
+            >
+              source
+            </a>
+          )}
+        </div>
+      )}
+    </div>
+
+    <div class="pt-8">
+      <Prose>
+        <slot />
+      </Prose>
+    </div>
+
+    <div class="pt-8">
+      <a
+        href="/projects"
+        class="font-mono text-sm text-cyan-11 transition-colors hover:text-cyan-12 hover:underline"
+      >
+        ← All projects
+      </a>
+    </div>
+  </article>
+</Layout>

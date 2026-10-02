@@ -4,8 +4,6 @@ description: "This site. A static Astro blog with a hand-tuned Radix palette, a 
 url: "https://bhaga.dev"
 github: "https://github.com/TheSagab/bhaga.dev"
 tech: ["astro", "tailwindcss", "mdx", "typescript"]
-featured: true
-date: "2026-10-02"
 ---
 
 The site you are reading. It is deliberately small: static pages, no client

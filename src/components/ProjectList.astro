@@ -1,0 +1,76 @@
+---
+/**
+ * The project card grid used by /projects.
+ *
+ * Shape from the "cards" variant of the post-list prototype (branch
+ * `prototype/projects`): a two-column grid of bordered cards, each carrying the
+ * title, a short description, the tech as chips, and the outbound links.
+ *
+ * No dates and no "featured" marker: a project is ongoing rather than dated, so
+ * ordering is alphabetical by title, done by the caller.
+ */
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+
+// Display the host rather than the full URL, and drop the scheme.
+const host = (u: string) => u.replace(/^https?:\/\//, "").replace(/\/$/, "");
+---
+
+<ul class="grid gap-4 sm:grid-cols-2">
+  {
+    projects.map((project) => (
+      <li class="flex flex-col rounded-lg border border-slate-4 bg-slate-2 p-4">
+        <a
+          href={`/projects/${project.id}/`}
+          class="font-semibold leading-snug transition-colors hover:text-cyan-11"
+        >
+          {project.data.title}
+        </a>
+
+        <p class="line-clamp-3 pt-2 text-sm leading-relaxed text-slate-11">
+          {project.data.description}
+        </p>
+
+        {project.data.tech && project.data.tech.length > 0 && (
+          <div class="flex flex-wrap gap-2 pt-3">
+            {project.data.tech.map((t) => (
+              <span class="rounded bg-slate-3 px-1.5 py-0.5 font-mono text-[11px] text-slate-11">
+                {t}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {(project.data.url || project.data.github) && (
+          <div class="mt-auto flex gap-3 pt-3 font-mono text-[11px]">
+            {project.data.url && (
+              <a
+                href={project.data.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-cyan-11 transition-colors hover:text-cyan-12 hover:underline"
+              >
+                {host(project.data.url)}
+              </a>
+            )}
+            {project.data.github && (
+              <a
+                href={project.data.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-cyan-11 transition-colors hover:text-cyan-12 hover:underline"
+              >
+                source
+              </a>
+            )}
+          </div>
+        )}
+      </li>
+    ))
+  }
+</ul>
