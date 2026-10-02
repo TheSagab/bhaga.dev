@@ -1,0 +1,89 @@
+---
+/**
+ * PROTOTYPE VARIANT C — "Timeline log".
+ * Posts read as a date-stamped log: monospace meta rail on the left, one row per
+ * post, grouped by year, with a terminal-flavoured `ls ./posts` header. No hero
+ * block, no descriptions — density and scannability over editorial polish.
+ */
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+
+const byYear = new Map<string, CollectionEntry<"blog">[]>();
+for (const post of posts) {
+  const year = String(post.data.pubDate.getFullYear());
+  byYear.set(year, [...(byYear.get(year) ?? []), post]);
+}
+const years = Array.from(byYear.entries());
+
+const mono = "font-[family-name:var(--font-jetbrains-mono)]";
+
+// Local YYYY-MM-DD, so the mono rail agrees with FormattedDate elsewhere.
+const isoDate = (date: Date) =>
+  [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-");
+---
+
+<!-- Identity line -->
+<section class="pb-10">
+  <p class={`${mono} pb-2 text-sm text-cyan-11`}>~/ bhaga — software engineer</p>
+  <h1 class="text-4xl font-bold pb-3 text-cyan-12">
+    Anindito Bhagawanta
+  </h1>
+  <p class="max-w-2xl text-lg">
+    Full-stack engineer from Indonesia. Below is the log of what I've been
+    writing — newest first.
+  </p>
+</section>
+
+<!-- Post log -->
+<section class="pb-8">
+  <div
+    class={`${mono} flex items-baseline justify-between border-b border-slate-6 pb-3 text-sm text-slate-11`}
+  >
+    <span>$ ls -lt ./posts</span>
+    <a href="/blog" class="text-cyan-11 transition-colors hover:text-cyan-12">
+      cd /blog →
+    </a>
+  </div>
+
+  {
+    years.map(([year, yearPosts]) => (
+      <div class="pt-8">
+        <h2 class={`${mono} pb-3 text-sm text-slate-11`}>{year}/</h2>
+        <ul>
+          {yearPosts.map((post) => (
+            <li>
+              <a
+                href={`/blog/${post.slug}/`}
+                class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 border-t border-slate-4 py-4 transition-colors hover:bg-slate-2"
+              >
+                <time
+                  datetime={post.data.pubDate.toISOString()}
+                  class={`${mono} text-sm text-slate-11`}
+                >
+                  {isoDate(post.data.pubDate)}
+                </time>
+                <span class="text-lg font-semibold leading-snug transition-colors group-hover:text-cyan-11">
+                  {post.data.title}
+                </span>
+                <span
+                  class={`${mono} hidden gap-3 text-xs text-cyan-11 sm:flex`}
+                >
+                  {post.data.tags?.map((tag) => <span>#{tag}</span>)}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</section>

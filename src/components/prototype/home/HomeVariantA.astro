@@ -1,0 +1,79 @@
+---
+/**
+ * PROTOTYPE VARIANT A — "Editorial list".
+ * Hero, then recent posts as a single-column editorial stack: date, big title,
+ * description, tags — separated by hairlines. No cards, no images.
+ */
+import type { CollectionEntry } from "astro:content";
+import FormattedDate from "../../FormattedDate.astro";
+import ReadingTime from "../../ReadingTime.astro";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+}
+
+const { posts } = Astro.props;
+---
+
+<!-- Hero -->
+<section class="pb-12">
+  <h1 class="text-4xl md:text-5xl font-bold pb-4 text-cyan-12">
+    Hi, I'm Anindito Bhagawanta
+  </h1>
+  <p class="text-xl md:text-2xl font-semibold pb-2 text-cyan-11">
+    You can call me Bhaga.
+  </p>
+  <p class="text-lg">
+    I'm a software engineer from Indonesia, building full-stack applications and
+    exploring the intersection of technology and creativity. When I'm not
+    coding, you'll find me playing video games, working on side projects, or
+    tinkering with random stuff.
+  </p>
+</section>
+
+<!-- Recent posts -->
+<section class="pb-8">
+  <div class="flex items-baseline justify-between border-b border-slate-6 pb-3">
+    <h2 class="text-2xl font-bold">Writing</h2>
+    <a href="/blog" class="text-sm text-cyan-11 hover:text-cyan-12">All posts →</a>
+  </div>
+
+  <ul class="divide-y divide-slate-4">
+    {
+      posts.map((post) => (
+        <li class="py-8">
+          <div class="flex items-center gap-3 pb-2 text-sm text-slate-11">
+            <FormattedDate date={post.data.pubDate} />
+            <span aria-hidden="true" class="text-slate-8">
+              ·
+            </span>
+            <ReadingTime content={post.body} />
+          </div>
+          <h3 class="text-2xl font-bold leading-snug md:text-3xl">
+            <a
+              href={`/blog/${post.slug}/`}
+              class="transition-colors hover:text-cyan-11"
+            >
+              {post.data.title}
+            </a>
+          </h3>
+          <p class="max-w-2xl pt-2 leading-relaxed text-slate-11">
+            {post.data.description}
+          </p>
+          {post.data.tags && post.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-3 pt-3 text-sm">
+              {post.data.tags.map((tag) => (
+                <a
+                  href={`/blog/tag/${tag}`}
+                  class="text-cyan-11 transition-colors hover:text-cyan-12"
+                >
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</section>
