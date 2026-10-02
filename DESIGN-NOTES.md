@@ -4,6 +4,36 @@ Running log of design decisions on this site, including the ones that were
 prototyped and then deliberately parked. Prototype code lives on throwaway
 branches (`prototype/*`); `main` keeps only the decisions that were made.
 
+## Projects: card grid, no dates (SETTLED)
+
+**Decision:** `/projects` is a two-column grid of cards, and each project has its
+own page. No dates, no featured field, alphabetical by title.
+
+**Question it settled:** how should a project be presented, and is it shaped like
+a post at all? A post is dated and finite; a project is ongoing. That ruled out
+the date column the post list uses, and it is why the sort is alphabetical rather
+than newest-first.
+
+The single page leads with a summary card carrying the title, description, tech
+and links, then the body as prose. The card is not decoration: a project body
+tends to be long and the outbound URL is the point of the page, so the link has
+to be reachable before the body rather than after it.
+
+**Schema:** `featured` and `date` were dropped from the `projects` collection.
+Both were in the original config but nothing consumed them, and the decision made
+them dead weight.
+
+**Prototype (primary source):** branch `prototype/projects`, route
+`/prototype/projects?v=<ledger|cards|compose>&ctx=<list|single>`. Three
+presentations across both surfaces, judged together because the list and the
+single page have to read as one system. `cards` won. The branch carries six
+fixture projects so the grid could be judged as a grid rather than as one card,
+plus the `role`/`status` fields `compose` trialled, which did not ship.
+
+That branch now reads its historical fields through a local widened type, because
+the schema on main no longer has them. A prototype is a record of a past state,
+so it should not force the schema to keep fields the decision removed.
+
 ## Reading measure: capped at 65ch (SETTLED)
 
 **Decision:** running text stops at a readable line length. Post bodies, `/about`
