@@ -19,8 +19,10 @@ build. Move to 7 when `@astrojs/ts-content-mapper` is no longer experimental.
 - In the loader API `post.slug` became `post.id`, `post.render()` became the
   `render()` import from `astro:content`, and `post.body` is now optional.
 
-The `projects` collection was dropped: it had no content directory and no page
-used it.
+The `projects` collection is restored and declares a glob loader over
+`src/content/projects`, with the pre-v6 schema (`url`, `github`, `tech`,
+`featured`, `date`). It currently holds one entry, this site. No page renders it
+yet, so the collection is data-only for now; `/projects` is still a stub.
 
 **UI equivalence is verified, not assumed.** `scripts/ui-fingerprint.sh` hashes
 the build; a stricter comparison checks that every page's visible words, class
