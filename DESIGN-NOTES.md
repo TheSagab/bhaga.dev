@@ -48,6 +48,11 @@ prototype-only and do not belong here.
 blurb are linked separately; the reading time and tags sit outside both. Verified
 there are zero nested anchors across every built page.
 
+**Where tags appear:** the list (`PostList.astro`) shows them in the row's
+right-hand meta column, and each post page shows them once at the end of the
+article under a "Tagged" label. Both link to `/blog/tag/<tag>` with the same
+cyan-plus-underline hover, so a tag reads the same wherever it appears.
+
 **Knock-on changes:** `/blog` and `/blog/tag/[tag]` lost their large 4xl-title
 cards for this list, which is what made the archive compact. `FormattedDate` is
 no longer used by any list (the component emits its own ISO date); it is still
