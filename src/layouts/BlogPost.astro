@@ -15,6 +15,20 @@ const { title, pubDate, updatedDate, tags, body } = Astro.props;
 <Layout>
   <article>
     <header class="mb-8 pb-8 border-b border-slate-6">
+      {
+        tags && tags.length > 0 && (
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1 pb-4 font-mono text-sm">
+            {tags.map((tag) => (
+              <a
+                href={`/blog/tag/${tag}`}
+                class="text-cyan-11 transition-colors hover:text-cyan-12 hover:underline"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        )
+      }
       <h1 class="text-4xl md:text-5xl font-bold text-slate-12 mb-4 tracking-tight leading-tight">{title}</h1>
       <div class="flex items-center gap-3 text-sm text-slate-11">
         <FormattedDate date={pubDate} />
@@ -35,24 +49,5 @@ const { title, pubDate, updatedDate, tags, body } = Astro.props;
     <Prose>
       <slot />
     </Prose>
-    {
-      tags && tags.length > 0 && (
-        <footer class="mt-10 border-t border-slate-6 pt-6">
-          <div class="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-sm">
-            <span class="text-xs uppercase tracking-[0.2em] text-slate-11">
-              Tagged
-            </span>
-            {tags.map((tag) => (
-              <a
-                href={`/blog/tag/${tag}`}
-                class="text-cyan-11 transition-colors hover:text-cyan-12 hover:underline"
-              >
-                #{tag}
-              </a>
-            ))}
-          </div>
-        </footer>
-      )
-    }
   </article>
 </Layout>
