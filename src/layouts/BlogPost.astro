@@ -9,7 +9,7 @@ type Props = CollectionEntry<"blog">["data"] & {
   body: string;
 };
 
-const { title, pubDate, updatedDate, body } = Astro.props;
+const { title, pubDate, updatedDate, tags, body } = Astro.props;
 ---
 
 <Layout>
@@ -35,5 +35,24 @@ const { title, pubDate, updatedDate, body } = Astro.props;
     <Prose>
       <slot />
     </Prose>
+    {
+      tags && tags.length > 0 && (
+        <footer class="mt-10 border-t border-slate-6 pt-6">
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-sm">
+            <span class="text-xs uppercase tracking-[0.2em] text-slate-11">
+              Tagged
+            </span>
+            {tags.map((tag) => (
+              <a
+                href={`/blog/tag/${tag}`}
+                class="text-cyan-11 transition-colors hover:text-cyan-12 hover:underline"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        </footer>
+      )
+    }
   </article>
 </Layout>
