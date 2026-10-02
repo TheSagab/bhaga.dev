@@ -4,6 +4,30 @@ Running log of design decisions on this site, including the ones that were
 prototyped and then deliberately parked. Prototype code lives on throwaway
 branches (`prototype/*`); `main` keeps only the decisions that were made.
 
+## Reading measure: capped at 65ch (SETTLED)
+
+**Decision:** running text stops at a readable line length. Post bodies, `/about`
+paragraphs and the home intro are all capped at 65ch, about 72 characters per
+line. Images, tables and code blocks still span the full column.
+
+**Question it settled:** how wide should prose be? Post bodies rendered
+prose-lg at 864px because `BlogProse.astro` sets `max-w-none`, which removes the
+typography plugin's own 65ch cap. That gave about 96 characters per line, well
+past the 60-70 that reads comfortably, and the same trap the notes already
+flagged for mono body copy.
+
+**Where the rule lives:** in `global.css`, not in `BlogProse.astro`. A `<style>`
+block in that component never reaches the build. I checked rather than assumed:
+adding a trivial `div { outline: ... }` rule to the component and rebuilding
+produced no matching CSS, while the same rule in `global.css` ships. Anything
+scoped to prose has to go in the global sheet until that is understood.
+
+**Prototype (primary source):** branch `prototype/type-scale`, route
+`/prototype/type`, switched with `?v=<current|measure|scale|side>`. `current` is
+the old full-width prose with a live character count, `measure` is what shipped,
+`scale` also resized the ladder (not taken: it adds steps and loses the calm of
+the near-flat scale). Run with `pnpm dev`; the route is on-demand rendered.
+
 ## Dependencies: on latest, TypeScript held at 6 (SETTLED)
 
 **Decision:** every dependency is on its latest release except TypeScript, which
