@@ -82,6 +82,7 @@
 }
 
 @theme inline {
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
   --color-cyan-1: var(--cyan-1);
   --color-cyan-2: var(--cyan-2);
   --color-cyan-3: var(--cyan-3);

@@ -1,37 +1,128 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { getCollection } from "astro:content";
-import PrototypeSwitcher from "../components/prototype/PrototypeSwitcher.astro";
-import HomeVariantA from "../components/prototype/home/HomeVariantA.astro";
-import HomeVariantB from "../components/prototype/home/HomeVariantB.astro";
-import HomeVariantC from "../components/prototype/home/HomeVariantC.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import ReadingTime from "../components/ReadingTime.astro";
 
-// PROTOTYPE — home page redesign. Three variants of this route, swapped in the
-// browser via ?variant=A|B|C (the switcher also flips them without a reload), so
-// the Skills & Technologies and Connect sections can be replaced by recent blog
-// posts in whichever shape reads best. Delete the switcher and the losing
-// variants once a winner is folded in.
-
+// Newest first. The latest post gets the spotlight panel; the next few fill the
+// date rail below it.
 const allPosts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+const [lead, ...rest] = allPosts.slice(0, 5);
 
-const VARIANTS = [
-  { key: "A", label: "Editorial list" },
-  { key: "B", label: "Featured lead" },
-  { key: "C", label: "Timeline log" },
-];
+// Grouped by year so the rail reads as a log.
+const byYear = new Map<string, typeof rest>();
+for (const post of rest) {
+  const year = String(post.data.pubDate.getFullYear());
+  byYear.set(year, [...(byYear.get(year) ?? []), post]);
+}
+const years = Array.from(byYear.entries());
+
+// Local YYYY-MM-DD for the monospace rail.
+const isoDate = (date: Date) =>
+  [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, "0"),
+    String(date.getDate()).padStart(2, "0"),
+  ].join("-");
 ---
 
 <Layout>
-  <div data-variant-panel="A">
-    <HomeVariantA posts={allPosts.slice(0, 4)} />
-  </div>
-  <div data-variant-panel="B" hidden>
-    <HomeVariantB posts={allPosts.slice(0, 4)} />
-  </div>
-  <div data-variant-panel="C" hidden>
-    <HomeVariantC posts={allPosts.slice(0, 6)} />
-  </div>
-  <PrototypeSwitcher variants={VARIANTS} current="A" />
+  <!-- Hero -->
+  <section class="pb-10">
+    <h1 class="text-4xl md:text-5xl font-bold pb-4 text-cyan-12">
+      Hi, I'm Anindito Bhagawanta
+    </h1>
+    <p class="text-xl md:text-2xl font-semibold pb-2 text-cyan-11">
+      You can call me Bhaga.
+    </p>
+    <p class="text-lg">
+      I'm a software engineer from Indonesia, building full-stack applications
+      and exploring the intersection of technology and creativity. When I'm not
+      coding, you'll find me playing video games, working on side projects, or
+      tinkering with random stuff.
+    </p>
+  </section>
+
+  <!-- Latest post -->
+  {
+    lead && (
+      <section class="pb-12">
+        <a href={`/blog/${lead.slug}/`} class="group block">
+          <article class="rounded-xl border border-slate-4 bg-slate-2 p-6 transition-colors group-hover:border-cyan-8 group-hover:bg-slate-3 md:p-8">
+            <p class="pb-3 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-11">
+              Latest post
+            </p>
+            <h2 class="pb-3 text-3xl font-bold leading-tight transition-colors group-hover:text-cyan-11 md:text-4xl">
+              {lead.data.title}
+            </h2>
+            <p class="max-w-2xl pb-5 leading-relaxed text-slate-11">
+              {lead.data.description}
+            </p>
+            <div class="flex flex-wrap items-center gap-3 text-sm text-slate-11">
+              <FormattedDate date={lead.data.pubDate} />
+              <span aria-hidden="true" class="text-slate-8">
+                ·
+              </span>
+              <ReadingTime content={lead.body} />
+              <span class="ml-auto font-semibold text-cyan-11">
+                Read post →
+              </span>
+            </div>
+          </article>
+        </a>
+      </section>
+    )
+  }
+
+  <!-- More posts, as a dated rail grouped by year -->
+  {
+    rest.length > 0 && (
+      <section class="pb-8">
+        <div class="flex items-baseline justify-between border-b border-slate-6 pb-3 text-sm">
+          <h2 class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-11">
+            More posts
+          </h2>
+          <a
+            href="/blog"
+            class="text-cyan-11 transition-colors hover:text-cyan-12"
+          >
+            All posts →
+          </a>
+        </div>
+
+        {years.map(([year, yearPosts]) => (
+          <div class="pt-8">
+            <h3 class="pb-3 font-mono text-sm text-slate-11">{year}/</h3>
+            <ul>
+              {yearPosts.map((post) => (
+                <li>
+                  <a
+                    href={`/blog/${post.slug}/`}
+                    class="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 border-t border-slate-4 py-4 transition-colors hover:bg-slate-2"
+                  >
+                    <time
+                      datetime={post.data.pubDate.toISOString()}
+                      class="font-mono text-sm text-slate-11"
+                    >
+                      {isoDate(post.data.pubDate)}
+                    </time>
+                    <span class="text-lg font-semibold leading-snug transition-colors group-hover:text-cyan-11">
+                      {post.data.title}
+                    </span>
+                    <span class="hidden gap-3 font-mono text-xs text-cyan-11 sm:flex">
+                      {post.data.tags?.map((tag) => (
+                        <span>#{tag}</span>
+                      ))}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+    )
+  }
 </Layout>
