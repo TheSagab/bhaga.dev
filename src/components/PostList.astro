@@ -45,13 +45,13 @@ const isoDate = (date: Date) =>
           <div class="min-w-0">
             <div class="flex items-baseline gap-x-3">
               <a
-                href={`/blog/${post.slug}/`}
+                href={`/blog/${post.id}/`}
                 class="font-semibold leading-snug transition-colors hover:text-cyan-11"
               >
                 {post.data.title}
               </a>
               <span class="ml-auto hidden shrink-0 items-baseline gap-3 pt-1 font-mono text-[11px] text-slate-11 sm:flex">
-                <ReadingTime content={post.body} />
+                <ReadingTime content={post.body ?? ""} />
                 {post.data.tags?.map((tag) => (
                   <a
                     href={`/blog/tag/${tag}`}
@@ -62,7 +62,7 @@ const isoDate = (date: Date) =>
                 ))}
               </span>
             </div>
-            <a href={`/blog/${post.slug}/`} class="block">
+            <a href={`/blog/${post.id}/`} class="block">
               <p class="line-clamp-2 pt-1 text-sm leading-relaxed text-slate-11">
                 {post.data.description}
               </p>

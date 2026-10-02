@@ -10,20 +10,20 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  experimental: {
-    fonts: [
-      {
-        name: "Plus Jakarta Sans",
-        provider: fontProviders.google(),
-        cssVariable: "--font-plus-jakarta-sans",
-        fallbacks: ["sans-serif"],
-      },
-      {
-        name: "JetBrains Mono",
-        provider: fontProviders.google(),
-        cssVariable: "--font-jetbrains-mono",
-        fallbacks: ["monospace"],
-      },
-    ],
-  },
+  // `fonts` moved out of `experimental` in Astro 7. Same two families, same
+  // cssVariable names, so nothing downstream changes.
+  fonts: [
+    {
+      name: "Plus Jakarta Sans",
+      provider: fontProviders.google(),
+      cssVariable: "--font-plus-jakarta-sans",
+      fallbacks: ["sans-serif"],
+    },
+    {
+      name: "JetBrains Mono",
+      provider: fontProviders.google(),
+      cssVariable: "--font-jetbrains-mono",
+      fallbacks: ["monospace"],
+    },
+  ],
 });

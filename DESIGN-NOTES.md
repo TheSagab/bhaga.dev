@@ -4,6 +4,33 @@ Running log of design decisions on this site, including the ones that were
 prototyped and then deliberately parked. Prototype code lives on throwaway
 branches (`prototype/*`); `main` keeps only the decisions that were made.
 
+## Dependencies: on latest, TypeScript held at 6 (SETTLED)
+
+**Decision:** every dependency is on its latest release except TypeScript, which
+is pinned to `^6`. `astro check` refuses TypeScript 7 ("does not currently
+support TypeScript 7.0"), and `pnpm build` runs `astro check`, so TS 7 breaks the
+build. Move to 7 when `@astrojs/ts-content-mapper` is no longer experimental.
+
+**Upgrade notes:** Astro 5 to 7 needed three source changes, all mechanical:
+
+- `experimental.fonts` is now top-level `fonts`.
+- Content config moves from `src/content/config.ts` to `src/content.config.ts`,
+  and each collection declares a loader (`glob`).
+- In the loader API `post.slug` became `post.id`, `post.render()` became the
+  `render()` import from `astro:content`, and `post.body` is now optional.
+
+The `projects` collection was dropped: it had no content directory and no page
+used it.
+
+**UI equivalence is verified, not assumed.** `scripts/ui-fingerprint.sh` hashes
+the build; a stricter comparison checks that every page's visible words, class
+sets and link targets are unchanged. All 18 pages match, as do `rss.xml` links
+and the sitemap URLs. Two build-output changes were confirmed harmless:
+Tailwind rewrites `calc(var(--spacing) * 1)` to `var(--spacing)`, and Astro 7 may
+change `--font-sans` (unused, `body` sets Jakarta explicitly). Astro 7 also stops
+emitting legacy woff fallbacks; the four woff2 files are byte-identical to before,
+and italics were already browser-synthesised in both versions, so nothing moves.
+
 ## Palette: real Radix scales (SETTLED)
 
 **Decision:** `:root` and `.dark` in `global.css` hold the cyan, slate and gray
